@@ -1,6 +1,6 @@
 using System;
 
-namespace TraversalProject_ASPNETCore5.Models
+namespace TraversalProject.PresentationLayer.Models
 {
     public class ErrorViewModel
     {

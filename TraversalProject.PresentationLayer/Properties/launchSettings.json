@@ -3,8 +3,8 @@
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
     "iisExpress": {
-      "applicationUrl": "http://localhost:26148",
-      "sslPort": 44368
+      "applicationUrl": "http://localhost:11478",
+      "sslPort": 44359
     }
   },
   "profiles": {
@@ -15,7 +15,7 @@
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-    "TraversalProject_ASPNETCore5": {
+    "TraversalProject.PresentationLayer": {
       "commandName": "Project",
       "dotnetRunMessages": "true",
       "launchBrowser": true,
