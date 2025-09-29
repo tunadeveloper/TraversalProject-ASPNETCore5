@@ -11,7 +11,7 @@ namespace TraversalProject.DataAccessLayer.Abstract
         void Insert(T p);
         void Delete(T p);
         void Update(T p);
-        List<T> GetAll();
+        List<T> GetList();
         T GetById(int id);
     }
 }

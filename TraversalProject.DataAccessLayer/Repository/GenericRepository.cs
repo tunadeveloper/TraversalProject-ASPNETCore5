@@ -23,7 +23,7 @@ namespace TraversalProject.DataAccessLayer.Repository
             _context.SaveChanges();
         }
 
-        public List<T> GetAll()
+        public List<T> GetList()
         {
            return _context.Set<T>().ToList();
         }

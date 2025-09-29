@@ -7,7 +7,7 @@ using TraversalProject.EntityLayer.Concrete;
 
 namespace TraversalProject.DataAccessLayer.Abstract
 {
-    public class IFeatureDal : IGenericDal<Feature>
+    public interface IFeatureDal : IGenericDal<Feature>
     {
     }
 }

@@ -1,0 +1,47 @@
+﻿@using TraversalProject.EntityLayer.Concrete
+@model List<Feature>
+<div class="best-rooms py-5">
+    <div class="container py-md-5">
+        <div class="ban-content-inf row">
+            <div class="maghny-gd-1 col-lg-6">
+                <div class="maghny-grid">
+                    <figure class="effect-lily border-radius  m-0">
+                        <img class="img-fluid" src="@ViewBag.PopularContentImageUrl" alt="" />
+                        <figcaption>
+                            <div>
+                                <h4>@ViewBag.PopularContentDescription</h4>
+                                <p>@ViewBag.PopularContentTitle </p>
+                            </div>
+
+                        </figcaption>
+                    </figure>
+                </div>
+            </div>
+
+           
+            <div class="maghny-gd-1 col-lg-6 mt-lg-0 mt-4">
+                <div class="row">
+                  
+                    @foreach (var item in Model)
+                    {
+                       @if(item.IsPopuler == false){
+                        <div class="maghny-gd-1 col-6">
+                            <div class="maghny-grid">
+                                <figure class="effect-lily border-radius">
+                                    <img class="img-fluid" src="@item.ImageUrl" alt="" />
+                                    <figcaption>
+                                        <div>
+                                            <h4>@item.Description</h4>
+                                            <p>@item.Title </p>
+                                        </div>
+                                    </figcaption>
+                                </figure>
+                            </div>
+                        </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

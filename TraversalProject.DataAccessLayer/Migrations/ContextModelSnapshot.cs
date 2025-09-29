@@ -176,6 +176,9 @@ namespace TraversalProject.DataAccessLayer.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("Email")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("NewsletterId");
 
                     b.ToTable("Newsletters");

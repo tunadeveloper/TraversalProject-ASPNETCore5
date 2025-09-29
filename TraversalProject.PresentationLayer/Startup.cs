@@ -8,6 +8,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TraversalProject.BusinessLayer.Abstract;
+using TraversalProject.BusinessLayer.Concrete;
+using TraversalProject.DataAccessLayer.Abstract;
+using TraversalProject.DataAccessLayer.Concrete;
+using TraversalProject.DataAccessLayer.EntityFramework;
 
 namespace TraversalProject.PresentationLayer
 {
@@ -24,6 +29,15 @@ namespace TraversalProject.PresentationLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+            services.AddDbContext<Context>();
+            services.AddScoped<IDestinationDal, EfDestinationDal>();
+            services.AddScoped<IDestinationService, DestinationManager>();
+            services.AddScoped<IFeatureDal, EfFeatureDal>();
+            services.AddScoped<IFeatureService, FeatureManager>();
+            services.AddScoped<ISubAboutDal, EfSubAboutDal>();
+            services.AddScoped<ISubAboutService, SubAboutManager>();
+            services.AddScoped<ITestimonialDal, EfTestimonialDal>();
+            services.AddScoped<ITestimonalService, TestimonialManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
