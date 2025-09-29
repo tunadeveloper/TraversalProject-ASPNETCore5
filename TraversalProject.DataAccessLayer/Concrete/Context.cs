@@ -12,7 +12,7 @@ namespace TraversalProject.DataAccessLayer.Concrete
     {
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer("server=DESKTOP-4H8A6S3;database=TraversalDB;integrated security=true;");
+            optionsBuilder.UseSqlServer("server=TUNA\\SQLEXPRESS;initial catalog=TraversalDB;integrated security=true;");
         }
 
         public DbSet<About> Abouts { get; set; }
