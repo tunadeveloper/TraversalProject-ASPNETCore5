@@ -1,0 +1,17 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace TraversalProject.DataAccessLayer.Abstract
+{
+    public interface IGenericDal<T> where T : class
+    {
+        void Insert(T p);
+        void Delete(T p);
+        void Update(T p);
+        List<T> GetAll();
+        T GetById(int id);
+    }
+}
