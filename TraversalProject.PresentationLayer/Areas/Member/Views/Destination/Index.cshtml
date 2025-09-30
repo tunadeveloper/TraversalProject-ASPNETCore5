@@ -1,0 +1,25 @@
+﻿@using TraversalProject.EntityLayer.Concrete
+@model List<Destination>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
+}
+<div class="container">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-12 col-md-6 col-lg-3 mb-4">
+                <div class="card h-100">
+                    <img src="@item.ImageUrl" class="card-img-top" alt="@item.City" style="height:200px; object-fit:cover;">
+                    <div class="card-body d-flex flex-column">
+                        <h5 class="card-title">@item.City</h5>
+                        <p class="card-text mb-1"><strong>Süre:</strong> @item.DayNight</p>
+                        <p class="card-text mb-1"><strong>Kapasite:</strong> @item.Capacity</p>
+                        <p class="card-text mb-3"><strong>Fiyat:</strong> @item.Price ₺</p>
+                        <a href="@Url.Action("Details", "Destination", new { id = item.DestinationId })" class="btn btn-primary mt-auto">Detaylar</a>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
