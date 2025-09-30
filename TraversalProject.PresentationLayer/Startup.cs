@@ -1,6 +1,8 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Mvc.Authorization;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -13,6 +15,7 @@ using TraversalProject.BusinessLayer.Concrete;
 using TraversalProject.DataAccessLayer.Abstract;
 using TraversalProject.DataAccessLayer.Concrete;
 using TraversalProject.DataAccessLayer.EntityFramework;
+using TraversalProject.EntityLayer.Concrete;
 
 namespace TraversalProject.PresentationLayer
 {
@@ -30,6 +33,18 @@ namespace TraversalProject.PresentationLayer
         {
             services.AddControllersWithViews();
             services.AddDbContext<Context>();
+            services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
+
+            services.AddMvc(config =>
+            {
+                var policy = new AuthorizationPolicyBuilder()
+                .RequireAuthenticatedUser()
+                .Build();
+                config.Filters.Add(new AuthorizeFilter(policy));
+            });
+
+            services.AddMvc();
+
             services.AddScoped<IDestinationDal, EfDestinationDal>();
             services.AddScoped<IDestinationService, DestinationManager>();
             services.AddScoped<IFeatureDal, EfFeatureDal>();
@@ -40,6 +55,7 @@ namespace TraversalProject.PresentationLayer
             services.AddScoped<ITestimonalService, TestimonialManager>();
             services.AddScoped<ICommentDal, EfCommentDal>();
             services.AddScoped<ICommentService, CommentManager>();
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -57,7 +73,7 @@ namespace TraversalProject.PresentationLayer
             }
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+            app.UseAuthentication();
             app.UseRouting();
 
             app.UseAuthorization();

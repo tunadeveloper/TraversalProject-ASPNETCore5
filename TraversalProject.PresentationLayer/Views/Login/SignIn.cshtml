@@ -1,0 +1,71 @@
+﻿@{
+    Layout = null;
+}
+@model UserRegisterViewModel
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Colorlib Templates">
+    <meta name="author" content="Colorlib">
+    <meta name="keywords" content="Colorlib Templates">
+    <title>Au Register Forms by Colorlib</title>
+
+    <link href="/colorlib-regform-4/vendor/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" media="all">
+    <link href="/colorlib-regform-4/vendor/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" media="all">
+
+    <link href="https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700" rel="stylesheet">
+
+    <link href="/colorlib-regform-4/vendor/select2/select2.min.css" rel="stylesheet" media="all">
+    <link href="/colorlib-regform-4/vendor/datepicker/daterangepicker.css" rel="stylesheet" media="all">
+
+    <link href="/colorlib-regform-4/css/main.css" rel="stylesheet" media="all">
+
+    <style>
+        .center-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .input-group {
+            width: 80%;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title text-center">Hoşgeldiniz</h2>
+                    <form method="POST" class="center-form">
+                        <div class="input-group">
+                            <label class="label">Username</label>
+                            <input class="input--style-4" type="text" name="UserName">
+                        </div>
+                        <div class="input-group">
+                            <label class="label">Password</label>
+                            <input class="input--style-4" type="password" name="Password">
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--blue" type="submit">Giriş Yap</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/colorlib-regform-4/vendor/jquery/jquery.min.js"></script>
+    <script src="/colorlib-regform-4/vendor/select2/select2.min.js"></script>
+    <script src="/colorlib-regform-4/vendor/datepicker/moment.min.js"></script>
+    <script src="/colorlib-regform-4/vendor/datepicker/daterangepicker.js"></script>
+    <script src="/colorlib-regform-4/js/global.js"></script>
+</body>
+</html>
