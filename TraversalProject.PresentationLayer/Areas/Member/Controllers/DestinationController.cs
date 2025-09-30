@@ -5,7 +5,6 @@ using TraversalProject.BusinessLayer.Abstract;
 namespace TraversalProject.PresentationLayer.Areas.Member.Controllers
 {
     [Area("Member")]
-    [AllowAnonymous]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
