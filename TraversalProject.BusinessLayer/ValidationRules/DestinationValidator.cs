@@ -25,13 +25,23 @@ namespace TraversalProject.BusinessLayer.ValidationRules
                 .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
                 .WithMessage("Geçerli bir görsel URL'si giriniz.");
 
+            RuleFor(x => x.CoverImageUrl)
+               .NotEmpty().WithMessage("Görsel URL'si boş bırakılamaz.")
+               .Must(url => Uri.IsWellFormedUriString(url, UriKind.Absolute))
+               .WithMessage("Geçerli bir görsel URL'si giriniz.");
+
             RuleFor(x => x.Description)
                 .NotEmpty().WithMessage("Açıklama boş bırakılamaz.")
                 .MinimumLength(10).WithMessage("Açıklama en az 10 karakter olmalıdır.")
                 .MaximumLength(1000).WithMessage("Açıklama en fazla 1000 karakter olabilir.");
 
+            RuleFor(x => x.Title)
+               .NotEmpty().WithMessage("Açıklama boş bırakılamaz.")
+               .MinimumLength(10).WithMessage("Açıklama en az 10 karakter olmalıdır.")
+               .MaximumLength(1000).WithMessage("Açıklama en fazla 1000 karakter olabilir.");
+
             RuleFor(x => x.Capacity)
-                .GreaterThan(0).WithMessage("Kapasite 0'dan büyük olmalıdır.");
+                    .GreaterThan(0).WithMessage("Kapasite 0'dan büyük olmalıdır.");
         }
     }
 }

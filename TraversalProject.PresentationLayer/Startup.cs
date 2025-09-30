@@ -38,6 +38,8 @@ namespace TraversalProject.PresentationLayer
             services.AddScoped<ISubAboutService, SubAboutManager>();
             services.AddScoped<ITestimonialDal, EfTestimonialDal>();
             services.AddScoped<ITestimonalService, TestimonialManager>();
+            services.AddScoped<ICommentDal, EfCommentDal>();
+            services.AddScoped<ICommentService, CommentManager>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

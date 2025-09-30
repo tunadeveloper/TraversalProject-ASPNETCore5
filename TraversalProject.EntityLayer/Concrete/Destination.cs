@@ -13,8 +13,12 @@ namespace TraversalProject.EntityLayer.Concrete
         public string DayNight { get; set; }
         public double Price { get; set; }
         public string ImageUrl { get; set; }
+        public string CoverImageUrl { get; set; }
+        public string Title { get; set; }
         public string Description { get; set; }
         public int Capacity { get; set; }
         public bool Status { get; set; }
+
+        public List<Comment> Comments { get; set; }
     }
 }

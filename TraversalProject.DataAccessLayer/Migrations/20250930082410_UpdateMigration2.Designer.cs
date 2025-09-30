@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraversalProject.DataAccessLayer.Concrete;
 
 namespace TraversalProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20250930082410_UpdateMigration2")]
+    partial class UpdateMigration2
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -47,35 +49,6 @@ namespace TraversalProject.DataAccessLayer.Migrations
                     b.HasKey("AboutId");
 
                     b.ToTable("Abouts");
-                });
-
-            modelBuilder.Entity("TraversalProject.EntityLayer.Concrete.Comment", b =>
-                {
-                    b.Property<int>("CommentId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("CreatedDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("DestinationId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NameSurname")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("UserComment")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("CommentId");
-
-                    b.HasIndex("DestinationId");
-
-                    b.ToTable("Comments");
                 });
 
             modelBuilder.Entity("TraversalProject.EntityLayer.Concrete.Contact", b =>
@@ -262,22 +235,6 @@ namespace TraversalProject.DataAccessLayer.Migrations
                     b.HasKey("TestimonialId");
 
                     b.ToTable("Testimonials");
-                });
-
-            modelBuilder.Entity("TraversalProject.EntityLayer.Concrete.Comment", b =>
-                {
-                    b.HasOne("TraversalProject.EntityLayer.Concrete.Destination", "Destination")
-                        .WithMany("Comments")
-                        .HasForeignKey("DestinationId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Destination");
-                });
-
-            modelBuilder.Entity("TraversalProject.EntityLayer.Concrete.Destination", b =>
-                {
-                    b.Navigation("Comments");
                 });
 #pragma warning restore 612, 618
         }
