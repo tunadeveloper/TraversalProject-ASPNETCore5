@@ -25,7 +25,7 @@ namespace TraversalProject.PresentationLayer.Controllers
             return View(values);
         }
 
-        public IActionResult DestinationDetails(int id = 1, int page = 1)
+        public IActionResult DestinationDetails(int id, int page = 1)
         {
             var destination = _destinationService.GetByIdBL(id);
             var commentsList = _commentService.GetListByDestinationIdBL(id);
