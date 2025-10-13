@@ -32,11 +32,11 @@ namespace TraversalProject.PresentationLayer.Controllers
                 var result = await _signInManager.PasswordSignInAsync(userSignInViewModel.Username, userSignInViewModel.Password, false, true);
                 if (result.Succeeded)
                 {
-                    return RedirectToAction("Index", "Destination", new { area = "Member" });
+                    return RedirectToAction("Index", "Profile", new { area = "Member" });
                 }
                 else
                 {
-                    ModelState.AddModelError("", "Invalid login attempt.");
+                    return RedirectToAction("SignIn", "Login", new { area = "" });
                 }
             }
             return View();
@@ -44,34 +44,34 @@ namespace TraversalProject.PresentationLayer.Controllers
 
         #region SignUp
 
-        //[HttpPost]
-        //public async Task<IActionResult> SignUp(UserRegisterViewModel userRegisterViewModel)
-        //{
-        //    AppUser appUser = new AppUser()
-        //    {
-        //        NameSurname = userRegisterViewModel.NameSurname,
-        //        Email = userRegisterViewModel.Email,
-        //        UserName = userRegisterViewModel.Email
-        //    };
-        //    var result = await _userManager.CreateAsync(appUser, userRegisterViewModel.Password);
-        //    if (result.Succeeded)
-        //    {
-        //        return RedirectToAction("SignIn", "Login");
-        //    }
-        //    else
-        //    {
-        //        foreach(var item in result.Errors)
-        //        {
-        //            ModelState.AddModelError("", item.Description);
-        //        }
-        //        return View(userRegisterViewModel);
-        //}
-        //}
+        [HttpPost]
+        public async Task<IActionResult> SignUp(UserRegisterViewModel userRegisterViewModel)
+        {
+            AppUser appUser = new AppUser()
+            {
+                NameSurname = userRegisterViewModel.NameSurname,
+                Email = userRegisterViewModel.Email,
+                UserName = userRegisterViewModel.Email
+            };
+            var result = await _userManager.CreateAsync(appUser, userRegisterViewModel.Password);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("SignIn", "Login");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError("", item.Description);
+                }
+                return View(userRegisterViewModel);
+            }
+        }
 
-        //public IActionResult SignUp()
-        //{
-        //    return View();
-        //}
+        public IActionResult SignUp()
+        {
+            return View();
+        }
 
         #endregion
     }

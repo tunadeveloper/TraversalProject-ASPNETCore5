@@ -1,8 +1,31 @@
-﻿
+﻿@using TraversalProject.PresentationLayer.Areas.Member.Models
+@model UserEditViewModel
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
 }
 
 <h1>Index</h1>
+<form method="post">
+    <label>Ad Soyad</label>
+    <input type="text" name="nameSurname" class="form-control" value="@Model.nameSurname"/>
+    <br />
 
+    <label>E-Posta</label>
+    <input type="text" name="email" class="form-control" value="@Model.email" />
+    <br />
+
+    <label>Telefon Numarası</label>
+    <input type="text" name="phoneNumber" class="form-control" value="@Model.phoneNumber" />
+    <br />
+
+    <label>Şifre</label>
+    <input type="text" name="password" class="form-control" value="@Model.password" />
+    <br />
+
+    <label>Şifre Tekar</label>
+    <input type="text" name="confirmPassword" class="form-control" value="@Model.confirmPassword" />
+    <br />
+ 
+    <button class="btn btn-success" type="submit">Güncelle</button>
+</form>
