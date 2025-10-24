@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.IO;
 using System.Threading.Tasks;
 using TraversalProject.EntityLayer.Concrete;
 using TraversalProject.PresentationLayer.Areas.Member.Models;
@@ -17,19 +19,38 @@ namespace TraversalProject.PresentationLayer.Areas.Member.Controllers
             _userManager = userManager;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> Index(UserEditViewModel model)
+        public async Task<IActionResult> Index()
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            UserEditViewModel model = new UserEditViewModel();
             model.nameSurname = values.NameSurname;
             model.phoneNumber = values.PhoneNumber;
             model.email = values.Email;
             return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Index(UserEditViewModel model)
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            if (model.image != null)
+            {
+                var resource = Directory.GetCurrentDirectory();
+                var extension = Path.GetExtension(model.image.FileName);
+                var imageName = Guid.NewGuid() + extension;
+                var saveLocation = resource + "/wwwroot/userImages/" + imageName;
+                var stream = new FileStream(saveLocation, FileMode.Create);
+                await model.image.CopyToAsync(stream);
+                user.ImageUrl = "/userImages/" + imageName;
+            }
+            user.NameSurname = model.nameSurname;
+            user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, model.password);
+            var result = await _userManager.UpdateAsync(user);
+            if (result.Succeeded)
+            {
+                return RedirectToAction("SignIn", "Login", new { area = "Member" });
+            }
+            return View();
         }
     }
 }
