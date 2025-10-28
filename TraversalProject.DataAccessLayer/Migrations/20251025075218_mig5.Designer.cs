@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using TraversalProject.DataAccessLayer.Concrete;
 
 namespace TraversalProject.DataAccessLayer.Migrations
 {
     [DbContext(typeof(Context))]
-    partial class ContextModelSnapshot : ModelSnapshot
+    [Migration("20251025075218_mig5")]
+    partial class mig5
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -435,8 +437,8 @@ namespace TraversalProject.DataAccessLayer.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DestinationID")
-                        .HasColumnType("int");
+                    b.Property<string>("Destination")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("PersonCount")
                         .HasColumnType("nvarchar(max)");
@@ -450,8 +452,6 @@ namespace TraversalProject.DataAccessLayer.Migrations
                     b.HasKey("ReservationID");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("DestinationID");
 
                     b.ToTable("Reservations");
                 });
@@ -571,15 +571,7 @@ namespace TraversalProject.DataAccessLayer.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("TraversalProject.EntityLayer.Concrete.Destination", "Destination")
-                        .WithMany("Reservations")
-                        .HasForeignKey("DestinationID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.Navigation("AppUser");
-
-                    b.Navigation("Destination");
                 });
 
             modelBuilder.Entity("TraversalProject.EntityLayer.Concrete.AppUser", b =>
@@ -590,8 +582,6 @@ namespace TraversalProject.DataAccessLayer.Migrations
             modelBuilder.Entity("TraversalProject.EntityLayer.Concrete.Destination", b =>
                 {
                     b.Navigation("Comments");
-
-                    b.Navigation("Reservations");
                 });
 #pragma warning restore 612, 618
         }

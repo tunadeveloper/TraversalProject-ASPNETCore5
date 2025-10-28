@@ -55,6 +55,11 @@ namespace TraversalProject.PresentationLayer
             services.AddScoped<ITestimonalService, TestimonialManager>();
             services.AddScoped<ICommentDal, EfCommentDal>();
             services.AddScoped<ICommentService, CommentManager>();
+            services.AddScoped<IReservationDal, EFReservationDal>();
+            services.AddScoped<IReservationService, ReservationManager>();
+            services.AddScoped<IGuideDal, EfGuideDal>();
+            services.AddScoped<IGuideService, GuideManager>();
+
 
         }
 
