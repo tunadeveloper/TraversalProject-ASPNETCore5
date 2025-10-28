@@ -1,0 +1,52 @@
+﻿@using TraversalProject.EntityLayer.Concrete
+@model Destination
+@{
+    ViewData["Title"] = "CreateDestination";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>CreateDestination</h1>
+<form method="post">
+    <div class="form-group mb-3">
+        <label>Şehir</label>
+        <input type="text" name="City" class="form-control"/>
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Gün Gece</label>
+        <input type="text" name="DayNight" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Fiyat</label>
+        <input type="text" name="Price" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Ana Görsel</label>
+        <input type="text" name="ImageUrl" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Kapasite</label>
+        <input type="text" name="Capacity" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Kapak Görseli</label>
+        <input type="text" name="CoverImageUrl" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Başlık</label>
+        <input type="text" name="Title" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label>Açıklama</label>
+        <textarea name="Description" cols="30" rows="5" class="form-control"></textarea>
+    </div>
+
+    <button class="btn btn-primary">Ekle</button>
+</form>
+

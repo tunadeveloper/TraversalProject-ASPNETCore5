@@ -1,0 +1,43 @@
+﻿@using TraversalProject.EntityLayer.Concrete
+@model List<Destination>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Destination</h1>
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Şehir</th>
+        <th>Fiyat</th>
+        <th>Kapasite</th>
+        <th>SİTEDE GÖR</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+        <th>Detaylar</th>
+    </tr>
+    @foreach(var item in Model)
+    {
+        <tr>
+            <td>@item.DestinationId</td>
+            <td>@item.City</td>
+            <td>@item.Price</td>
+            <td>@item.Capacity</td>
+            <td>
+                <a href="#" class="btn btn-outline-dark">Sitede Gör</a>
+            </td>
+            <td>
+                <a href="/Admin/Destination/DeleteDestination/@item.DestinationId" class="btn btn-outline-danger">Sil</a>
+            </td>
+            <td>
+                <a href="/Admin/Destination/UpdateDestination/@item.DestinationId" class="btn btn-outline-success">Güncelle</a>
+            </td>
+            <td>
+                <a href="/Admin/Destination/DetailDestination/@item.DestinationId" class="btn btn-outline-warning">Detaylar</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<a href="#" class="btn btn-primary">Yeni Ekle</a>
