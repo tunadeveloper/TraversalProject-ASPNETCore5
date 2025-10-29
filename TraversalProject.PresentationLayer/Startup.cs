@@ -59,6 +59,8 @@ namespace TraversalProject.PresentationLayer
             services.AddScoped<IReservationService, ReservationManager>();
             services.AddScoped<IGuideDal, EfGuideDal>();
             services.AddScoped<IGuideService, GuideManager>();
+            services.AddScoped<INewsletterDal, EfNewsletterDal>();
+            services.AddScoped<INewsletterService, NewsletterManager>();
 
 
         }

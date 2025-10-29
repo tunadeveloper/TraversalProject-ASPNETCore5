@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,19 +13,24 @@ namespace TraversalProject.DataAccessLayer.EntityFramework
 {
     public class EfCommentDal : GenericRepository<Comment>, ICommentDal
     {
+        private readonly Context _context;
         public EfCommentDal(Context context) : base(context)
         {
+            _context = context;
         }
 
         public List<Comment> GetListByDestinationId(int id)
         {
-            using (var context = new Context())
-            {
-                return context.Comments
+                return _context.Comments
                               .Where(x => x.DestinationId == id)
                               .OrderByDescending(x => x.CreatedDate)
                               .ToList();
-            }
+            
+        }
+
+        public List<Comment> GetListCommentWithDestination()
+        {
+            return _context.Comments.Include(x => x.Destination).ToList();
         }
     }
 }

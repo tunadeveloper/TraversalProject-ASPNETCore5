@@ -10,5 +10,6 @@ namespace TraversalProject.DataAccessLayer.Abstract
     public interface ICommentDal:IGenericDal<Comment>
     {
         List<Comment> GetListByDestinationId(int id);
+        List<Comment> GetListCommentWithDestination();
     }
 }

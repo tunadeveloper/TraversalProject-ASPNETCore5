@@ -39,6 +39,11 @@ namespace TraversalProject.BusinessLayer.Concrete
             return _commentDal.GetListByDestinationId(id);
         }
 
+        public List<Comment> GetListCommentWithDestinationBL()
+        {
+            return _commentDal.GetListCommentWithDestination();
+        }
+
         public void InsertBL(Comment p)
         {
            _commentDal.Insert(p);

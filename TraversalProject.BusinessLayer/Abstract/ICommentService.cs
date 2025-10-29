@@ -10,5 +10,6 @@ namespace TraversalProject.BusinessLayer.Abstract
     public interface ICommentService: IGenericService<Comment>
     {
         List<Comment> GetListByDestinationIdBL(int id);
+        List<Comment> GetListCommentWithDestinationBL();
     }
 }
