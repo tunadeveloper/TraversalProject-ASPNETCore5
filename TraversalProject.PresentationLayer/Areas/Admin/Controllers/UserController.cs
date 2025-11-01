@@ -9,10 +9,12 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
     public class UserController : Controller
     {
      private readonly IAppUserService _appUserService;
+        private readonly IReservationService _reservationService;
 
-        public UserController(IAppUserService appUserService)
+        public UserController(IAppUserService appUserService, IReservationService reservationService)
         {
             _appUserService = appUserService;
+            _reservationService = reservationService;
         }
 
         public IActionResult Index()
@@ -56,7 +58,7 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
 
         public IActionResult UserReservation(int id)
         {
-            var values = _appUserService.GetByIdBL(id);
+           var values = _reservationService.GetListWithReservationByAcceptedBL(id);
             return View(values);
         }
     }

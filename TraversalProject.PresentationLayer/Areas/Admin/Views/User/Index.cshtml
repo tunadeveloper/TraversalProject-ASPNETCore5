@@ -27,21 +27,11 @@
                 <td>@item.Email</td>
 
                 <td>
-                    <button type="button" class="btn btn-outline-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#commentModal_@item.Id">
-                        Yorumlar
-                    </button>
+                    <a href="/Admin/User/UserCommentDetail/@item.Id" class="btn btn-outline-primary">Yorumlar</a>
                 </td>
-
                 <td>
-                    <button type="button" class="btn btn-outline-dark"
-                            data-bs-toggle="modal"
-                            data-bs-target="#historyModal_@item.Id">
-                        Tur Geçmişi
-                    </button>
+                    <a href="/Admin/User/UserReservation/@item.Id" class="btn btn-outline-dark">Tur Geçmişi</a>
                 </td>
-
                 <td>
                     <a href="/Admin/User/DeleteUser/@item.Id" class="btn btn-outline-danger">Sil</a>
                 </td>
@@ -49,73 +39,7 @@
                     <a href="/Admin/User/UpdateUser/@item.Id" class="btn btn-outline-warning">Güncelle</a>
                 </td>
             </tr>
-
-          /* <div class="modal fade" id="commentModal_@item.Id" tabindex="-1" aria-labelledby="commentModalLabel_@item.Id" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="commentModalLabel_@item.Id">@item.NameSurname - Yorumlar</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-                        </div>
-                        <div class="modal-body">
-                            @if (item.Comments != null && item.Comments.Any())
-                            {
-                                foreach (var c in item.Comments)
-                                {
-                                    <div class="border-bottom mb-3 pb-2">
-                                        <strong>@c.Destination.City</strong> |
-                                        <small class="text-muted">@c.CreatedDate.ToString("dd MMM yyyy")</small>
-                                        <p class="mt-2 text-secondary">@c.UserComment</p>
-                                    </div>
-                                }
-                            }
-                            else
-                            {
-                                <p class="text-muted">Bu kullanıcının yorumu bulunmuyor.</p>
-                            }
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            */
-            <div class="modal fade" id="historyModal_@item.Id" tabindex="-1" aria-labelledby="historyModalLabel_@item.Id" aria-hidden="true">
-                <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="historyModalLabel_@item.Id">@item.NameSurname - Tur Geçmişi</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Kapat"></button>
-                        </div>
-                        <div class="modal-body">
-                            @if (item.Reservations != null && item.Reservations.Any())
-                            {
-                                <ul class="list-group">
-                                    @foreach (var r in item.Reservations)
-                                    {
-                                        <li class="list-group-item d-flex justify-content-between align-items-center">
-                                            <span>
-                                                <strong>@r.Destination.City</strong> -
-                                                <small>@r.Destination.DayNight</small>
-                                            </span>
-                                            <span class="text-muted">@r.ReservationDate.ToString("dd MMM yyyy")</span>
-                                        </li>
-                                    }
-                                </ul>
-                            }
-                            else
-                            {
-                                <p class="text-muted">Bu kullanıcının tur geçmişi bulunmuyor.</p>
-                            }
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
         }
     </tbody>
 </table>
-<a href="/Admin/User/CreateUser/" class="btn btn-outline-success">Yeni Kullanıcı</a>
+<a href="/Login/SıgnUp/" class="btn btn-outline-success">Yeni Kullanıcı</a>
