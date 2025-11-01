@@ -61,6 +61,8 @@ namespace TraversalProject.PresentationLayer
             services.AddScoped<IGuideService, GuideManager>();
             services.AddScoped<INewsletterDal, EfNewsletterDal>();
             services.AddScoped<INewsletterService, NewsletterManager>();
+            services.AddScoped<IAppUserDal, EfAppUserDal>();
+            services.AddScoped<IAppUserService, AppUserManager>();
 
 
         }
