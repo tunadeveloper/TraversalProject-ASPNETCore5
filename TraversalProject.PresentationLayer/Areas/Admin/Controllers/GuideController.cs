@@ -1,6 +1,8 @@
 ﻿
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 using TraversalProject.BusinessLayer.Abstract;
+using TraversalProject.BusinessLayer.ValidationRules;
 using TraversalProject.EntityLayer.Concrete;
 
 namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
@@ -26,9 +28,22 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
         [HttpPost]
         public IActionResult CreateGuide(EntityLayer.Concrete.Guide guide)
         {
-            guide.Status = true;
-            _guideService.InsertBL(guide);
-            return Redirect("/Admin/Guide/Index");
+            GuideValidator _guideValidator = new GuideValidator();
+            ValidationResult result = _guideValidator.Validate(guide);
+            if (result.IsValid)
+            {
+                guide.Status = true;
+                _guideService.InsertBL(guide);
+                return Redirect("/Admin/Guide/Index");
+            }
+            else
+            {
+                foreach (var item in result.Errors)
+                {
+                    ModelState.AddModelError(item.PropertyName, item.ErrorMessage);
+                }
+                return View();
+            }
         }
 
         public IActionResult DeleteGuide(int id)

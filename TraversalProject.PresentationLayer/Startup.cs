@@ -1,3 +1,4 @@
+using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -15,6 +16,7 @@ using System.Threading.Tasks;
 using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.BusinessLayer.Concrete;
 using TraversalProject.BusinessLayer.Container;
+using TraversalProject.BusinessLayer.ValidationRules;
 using TraversalProject.DataAccessLayer.Abstract;
 using TraversalProject.DataAccessLayer.Concrete;
 using TraversalProject.DataAccessLayer.EntityFramework;
@@ -40,7 +42,14 @@ namespace TraversalProject.PresentationLayer
                 x.SetMinimumLevel(LogLevel.Debug);
                 x.AddDebug();
             });
-            services.AddControllersWithViews();
+            services
+               .AddControllersWithViews()
+               .AddFluentValidation(fv =>
+               {
+                   fv.DisableDataAnnotationsValidation = true;
+                   fv.AutomaticValidationEnabled = false;
+               });
+
             services.AddDbContext<Context>();
             services.AddIdentity<AppUser, AppRole>().AddEntityFrameworkStores<Context>();
 

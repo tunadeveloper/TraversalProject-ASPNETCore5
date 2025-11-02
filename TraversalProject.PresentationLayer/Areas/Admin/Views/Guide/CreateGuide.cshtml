@@ -10,27 +10,32 @@
 <form method="post">
     <div class="form-group mb-3">
         <label for="NameSurname">Ad Soyad</label>
-        <input type="text" class="form-control" id="NameSurname" name="NameSurname" required />
+        <input type="text" class="form-control" name="NameSurname" />
+        @Html.ValidationMessageFor(model => model.NameSurname, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group mb-3">
         <label for="NameSurname">Açıklama</label>
-        <textarea class="form-control" id="Description" name="Description" rows="4" required></textarea>
+        <textarea class="form-control" name="Description" rows="4" ></textarea>
+        @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group mb-3">
         <label for="NameSurname">Görsel URL</label>
-        <input type="text" class="form-control" id="ImageUrl" name="ImageUrl" required />
+        <input type="text" class="form-control" name="ImageUrl"  />
+        @Html.ValidationMessageFor(model => model.ImageUrl, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group mb-3">
         <label for="NameSurname">X URL</label>
-        <input type="text" class="form-control" id="ImageUrl" name="XUrl" required />
+        <input type="text" class="form-control" name="XUrl"  />
+        @Html.ValidationMessageFor(model => model.XUrl, "", new { @class = "text-danger" })
     </div>
 
     <div class="form-group mb-3">
         <label for="NameSurname">Instagram URL</label>
-        <input type="text" class="form-control" id="ImageUrl" name="InstagramUrl" required />
+        <input type="text" class="form-control"name="InstagramUrl"  />
+        @Html.ValidationMessageFor(model => model.InstagramUrl, "", new { @class = "text-danger" })
     </div>
 
     <button type="submit" class="btn btn-primary">Oluştur</button>
