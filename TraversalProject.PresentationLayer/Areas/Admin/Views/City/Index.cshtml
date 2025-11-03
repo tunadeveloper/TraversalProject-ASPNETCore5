@@ -1,0 +1,49 @@
+﻿@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+<br />
+<button type="button" class="btn btn-primary mb-3" id="btngetlist">Şehir Listesi</button>
+
+<br />
+<br />
+
+<div id="citylist"></div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+
+<script>
+    $("#btngetlist").click(function () {
+        $.ajax({
+            type: "GET",
+            url: "/Admin/City/CityList",
+            dataType: "json",
+            success: function (data) {
+                console.log(data);
+
+                let tableHtml = `
+                    <table class="table table-bordered">
+                        <tr><th>#</th><th>Şehir Adı</th><th>Ülke Adı</th></tr>
+                `;
+
+                $.each(data, function (index, value) {
+                    tableHtml += `
+                        <tr>
+                            <td>${value.cityId}</td>
+                            <td>${value.cityName}</td>
+                            <td>${value.cityCountry}</td>
+                        </tr>
+                    `;
+                });
+
+                tableHtml += "</table>";
+                $("#citylist").html(tableHtml);
+            },
+            error: function (xhr) {
+                console.error("Hata:", xhr);
+            }
+        });
+    });
+</script>
