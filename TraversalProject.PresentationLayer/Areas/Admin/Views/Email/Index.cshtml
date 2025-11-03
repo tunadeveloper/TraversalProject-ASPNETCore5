@@ -1,0 +1,28 @@
+﻿@using TraversalProject.PresentationLayer.Models
+@model EmailRequest
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+
+<form method="post">
+    <div class="form-group">
+        <label>Alıcı E-Posta</label>
+        <input name="ReceiverEmail" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label>Konu</label>
+        <input name="Subject" class="form-control" />
+    </div>
+    <br />
+    <div class="form-group">
+        <label>Mesaj</label>
+        <textarea name="Content" class="form-control" rows="6"></textarea>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">Gönder</button>
+</form>

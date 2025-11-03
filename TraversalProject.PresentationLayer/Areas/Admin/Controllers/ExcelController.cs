@@ -8,11 +8,10 @@ using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.DataAccessLayer.Concrete;
 using TraversalProject.PresentationLayer.Models;
 
-namespace TraversalProject.PresentationLayer.Controllers
+namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
 {
-    [AllowAnonymous]
+    [Area("Admin")]
     public class ExcelController : Controller
-
     {
         public IActionResult Index()
         {
