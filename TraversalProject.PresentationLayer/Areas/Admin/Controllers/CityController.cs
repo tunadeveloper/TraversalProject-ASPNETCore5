@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.PresentationLayer.Models;
 
 namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
@@ -10,13 +11,20 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
     [AllowAnonymous]
     public class CityController : Controller
     {
+        private readonly IDestinationService _destinationService;
+
+        public CityController(IDestinationService destinationService)
+        {
+            _destinationService = destinationService;
+        }
+
         public IActionResult Index()
         {
             return View();
         }
         public IActionResult CityList()
         {
-            return Json(cities);
+            return Json(_destinationService.GetListBL());
         }
 
 

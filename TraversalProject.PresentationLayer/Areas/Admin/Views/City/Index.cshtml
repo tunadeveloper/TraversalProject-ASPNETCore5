@@ -29,15 +29,15 @@
 
                 let tableHtml = `
                     <table class="table table-bordered">
-                        <tr><th>#</th><th>Şehir Adı</th><th>Ülke Adı</th></tr>
+                        <tr><th>Şehir Adı</th><th>Gün Gece</th><th>Fiyat</th></tr>
                 `;
 
                 $.each(data, function (index, value) {
                     tableHtml += `
                         <tr>
-                            <td>${value.cityId}</td>
-                            <td>${value.cityName}</td>
-                            <td>${value.cityCountry}</td>
+                            <td>${value.city}</td>
+                            <td>${value.dayNight}</td>
+                            <td>${value.price}</td>
                         </tr>
                     `;
                 });
