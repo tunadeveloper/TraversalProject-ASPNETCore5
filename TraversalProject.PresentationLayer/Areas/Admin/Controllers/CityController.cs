@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using TraversalProject.BusinessLayer.Abstract;
+using TraversalProject.EntityLayer.Concrete;
 using TraversalProject.PresentationLayer.Models;
 
 namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
@@ -27,7 +28,40 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
             return Json(_destinationService.GetListBL());
         }
 
+        [HttpPost]
+        public IActionResult AddCityDestination(Destination destination)
+        {
+            destination.Status = true;
+           _destinationService.InsertBL(destination);
+            return Json(destination);
+        }
 
+        public IActionResult GetById(int id)
+        {
+            var values = _destinationService.GetByIdBL(id);
+            return Json(values);
+        }
+
+        [HttpPost]
+        public IActionResult DeleteCity(int id)
+        {
+            var value = _destinationService.GetByIdBL(id);
+            _destinationService.DeleteBL(value);
+            return Json(value);
+        }
+
+        [HttpPost]
+        public IActionResult UpdateCity(Destination destination)
+        {
+            var existing = _destinationService.GetByIdBL(destination.DestinationId);
+            existing.City = destination.City;
+            existing.DayNight = destination.DayNight;
+            existing.Price = destination.Price;
+            _destinationService.UpdateBL(existing);
+            return Json(destination);
+        }
+        #region Static City List
+        /*
         public static List<CityClass> cities = new List<CityClass>
         {
             new CityClass
@@ -49,5 +83,7 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
                 CityCountry = "Germany"
             }
         };
+        */
+        #endregion 
     }
 }

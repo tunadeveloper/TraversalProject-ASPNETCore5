@@ -3,8 +3,10 @@
     Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Şehir İşlemleri</h1>
 <br />
+
+<!-- Butonlar -->
 <button type="button" class="btn btn-primary mb-3" id="btngetlist">Şehir Listesi</button>
 <button type="button" class="btn btn-info mb-3" id="btngetbyid">Şehir Getir</button>
 <button type="button" class="btn btn-success mb-3" id="btnaddcity">Şehir Ekle</button>
@@ -14,39 +16,199 @@
 <br />
 <br />
 
+<!-- Ortak input alanı -->
+<div id="cityForm" class="card p-3 mb-3" style="display:none; max-width: 400px;">
+    <h5 id="formTitle"></h5>
+
+    <input type="hidden" id="destinationId" />
+
+    <div id="idSection" class="form-group mb-2" style="display:none;">
+        <label>Şehir ID</label>
+        <input type="number" id="inputId" class="form-control" placeholder="ID giriniz">
+    </div>
+
+    <div id="cityFields" style="display:none;">
+        <div class="form-group mb-2">
+            <label>Şehir Adı</label>
+            <input type="text" id="city" class="form-control" placeholder="Şehir adı">
+        </div>
+        <div class="form-group mb-2">
+            <label>Gün / Gece</label>
+            <input type="text" id="dayNight" class="form-control" placeholder="Örn: 3 Gün 2 Gece">
+        </div>
+        <div class="form-group mb-2">
+            <label>Fiyat</label>
+            <input type="number" id="price" class="form-control" placeholder="Fiyat">
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-success mt-2" id="btnsavecity" style="display:none;">Kaydet</button>
+    <button type="button" class="btn btn-info mt-2" id="btngetcitybyidconfirm" style="display:none;">Getir</button>
+    <button type="button" class="btn btn-danger mt-2" id="btndeletecityconfirm" style="display:none;">Sil</button>
+    <button type="button" class="btn btn-warning mt-2" id="btnupdateconfirm" style="display:none;">Güncelle</button>
+    <button type="button" class="btn btn-secondary mt-2" id="btncancel">İptal</button>
+</div>
+
+<!-- Şehir listesi -->
 <div id="citylist"></div>
 
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 
 <script>
+    /* ------- Listeleme ------- */
     $("#btngetlist").click(function () {
         $.ajax({
             type: "GET",
             url: "/Admin/City/CityList",
             dataType: "json",
             success: function (data) {
-                console.log(data);
-
                 let tableHtml = `
                     <table class="table table-bordered">
-                        <tr><th>Şehir Adı</th><th>Gün Gece</th><th>Fiyat</th></tr>
+                        <tr><th>ID</th><th>Şehir</th><th>Gün/Gece</th><th>Fiyat</th></tr>
                 `;
-
                 $.each(data, function (index, value) {
                     tableHtml += `
                         <tr>
+                            <td>${value.destinationId}</td>
                             <td>${value.city}</td>
                             <td>${value.dayNight}</td>
                             <td>${value.price}</td>
                         </tr>
                     `;
                 });
-
                 tableHtml += "</table>";
                 $("#citylist").html(tableHtml);
-            },
-            error: function (xhr) {
-                console.error("Hata:", xhr);
+            }
+        });
+    });
+
+    function resetForm() {
+        $("#cityForm input").val("");
+        $("#cityForm").slideUp();
+        $("#cityFields").hide();
+        $("#idSection").hide();
+        $("#btnsavecity, #btnupdateconfirm, #btndeletecityconfirm, #btngetcitybyidconfirm").hide();
+    }
+
+    $("#btncancel").click(function () {
+        resetForm();
+    });
+
+    /* ------- Şehir Ekle ------- */
+    $("#btnaddcity").click(function () {
+        resetForm();
+        $("#formTitle").text("Yeni Şehir Ekle");
+        $("#cityFields").show();
+        $("#btnsavecity").show();
+        $("#cityForm").slideDown();
+    });
+
+    $("#btnsavecity").click(function () {
+        let cityvalues = {
+            city: $("#city").val(),
+            dayNight: $("#dayNight").val(),
+            price: $("#price").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/City/AddCityDestination",
+            data: cityvalues,
+            success: function () {
+                alert("Şehir eklendi!");
+                resetForm();
+                $("#btngetlist").click();
+            }
+        });
+    });
+
+    /* ------- ID ile Getirme ------- */
+    $("#btngetbyid").click(function () {
+        resetForm();
+        $("#formTitle").text("Şehir Getir (ID ile)");
+        $("#idSection").show();
+        $("#btngetcitybyidconfirm").show();
+        $("#cityForm").slideDown();
+    });
+
+    $("#btngetcitybyidconfirm").click(function () {
+        let id = $("#inputId").val();
+        if (!id) return alert("Lütfen bir ID girin!");
+
+        $.ajax({
+            type: "GET",
+            url: "/Admin/City/GetById",
+            data: { id: id },
+            success: function (data) {
+                if (!data) {
+                    alert("Kayıt bulunamadı!");
+                    return;
+                }
+                $("#citylist").html(`
+                    <div class="alert alert-info">
+                        <b>ID:</b> ${data.destinationId} <br/>
+                        <b>Şehir:</b> ${data.city} <br/>
+                        <b>Gün/Gece:</b> ${data.dayNight} <br/>
+                        <b>Fiyat:</b> ${data.price}
+                    </div>
+                `);
+            }
+        });
+    });
+
+    /* ------- ID ile Silme ------- */
+    $("#btndeletecity").click(function () {
+        resetForm();
+        $("#formTitle").text("Şehir Sil (ID ile)");
+        $("#idSection").show();
+        $("#btndeletecityconfirm").show();
+        $("#cityForm").slideDown();
+    });
+
+    $("#btndeletecityconfirm").click(function () {
+        let id = $("#inputId").val();
+        if (!id) return alert("Silinecek şehir ID’sini girin!");
+
+        if (confirm("Bu şehri silmek istediğine emin misin?")) {
+            $.ajax({
+                type: "POST",
+                url: "/Admin/City/DeleteCity",
+                data: { id: id },
+                success: function () {
+                    alert("Şehir silindi!");
+                    resetForm();
+                    $("#btngetlist").click();
+                }
+            });
+        }
+    });
+
+    /* ------- ID ile Güncelleme ------- */
+    $("#btnupdatecity").click(function () {
+        resetForm();
+        $("#formTitle").text("Şehir Güncelle (ID ile)");
+        $("#idSection").show();
+        $("#cityFields").show();
+        $("#btnupdateconfirm").show();
+        $("#cityForm").slideDown();
+    });
+
+    $("#btnupdateconfirm").click(function () {
+        let cityvalues = {
+            destinationId: $("#inputId").val(),
+            city: $("#city").val(),
+            dayNight: $("#dayNight").val(),
+            price: $("#price").val()
+        };
+
+        $.ajax({
+            type: "POST",
+            url: "/Admin/City/UpdateCity",
+            data: cityvalues,
+            success: function (res) {
+                alert("Şehir güncellendi!");
+                resetForm();
+                $("#btngetlist").click();
             }
         });
     });
