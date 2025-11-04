@@ -1,0 +1,35 @@
+﻿@using TraversalProject.EntityLayer.Concrete
+@model List<ContactUs>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Index</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>#</th>
+        <th>Adı Soyadı</th>
+        <th>E-Posta Adresi</th>
+        <th>Konu</th>
+        <th>Tarih</th>
+        <th>Sil</th>
+        <th>Detay</th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>@item.ContactUsId</td>
+            <td>@item.Name</td>
+            <td>@item.Email</td>
+            <td>@item.Subject</td>
+            <td>@item.Content</td>
+            <td>@item.MessageDate</td>
+            <td><a href="#" class="btn btn-outline-danger">Sil</a></td>
+            <td><a href="#" class="btn btn-outline-warning">Detaylar</a></td>
+        </tr>
+    }
+</table>
+

@@ -33,6 +33,8 @@ namespace TraversalProject.BusinessLayer.Container
             services.AddScoped<INewsletterService, NewsletterManager>();
             services.AddScoped<IAppUserDal, EfAppUserDal>();
             services.AddScoped<IAppUserService, AppUserManager>();
+            services.AddScoped<IContactUsDal, EfContactUsDal>();
+            services.AddScoped<IContactUsService, ContactUsManager>();
         }
     }
 }
