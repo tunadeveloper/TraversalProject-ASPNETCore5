@@ -5,7 +5,7 @@ using TraversalProject.EntityLayer.Concrete;
 
 namespace TraversalProject.PresentationLayer.ViewComponents.MemberDashboard
 {
-    public class _ProfileInformationComponentPartial:ViewComponent
+    public class _ProfileInformationComponentPartial : ViewComponent
     {
         private readonly UserManager<AppUser> _userManager;
 
@@ -22,5 +22,5 @@ namespace TraversalProject.PresentationLayer.ViewComponents.MemberDashboard
             ViewBag.email = values.Email;
             return View();
         }
-        }
+    }
 }

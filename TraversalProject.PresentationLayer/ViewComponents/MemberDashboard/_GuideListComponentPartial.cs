@@ -3,7 +3,7 @@ using TraversalProject.BusinessLayer.Abstract;
 
 namespace TraversalProject.PresentationLayer.ViewComponents.MemberDashboard
 {
-    public class _GuideListComponentPartial:ViewComponent
+    public class _GuideListComponentPartial : ViewComponent
     {
         private readonly IGuideService _guideService;
 
@@ -17,5 +17,5 @@ namespace TraversalProject.PresentationLayer.ViewComponents.MemberDashboard
             var values = _guideService.GetListBL();
             return View(values);
         }
-        }
+    }
 }

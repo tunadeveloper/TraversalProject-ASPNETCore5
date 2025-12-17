@@ -36,7 +36,7 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
 
         public IActionResult StaticExcelReport()
         {
-            ExcelPackage.License.SetNonCommercialPersonal("Tunahan Cengiz");
+            ExcelPackage.LicenseContext = LicenseContext.NonCommercial;
 
             using var excel = new ExcelPackage();
             var workSheet = excel.Workbook.Worksheets.Add("Deneme1");

@@ -20,7 +20,7 @@ namespace TraversalProject.PresentationLayer.ViewComponents.Home
                                .FirstOrDefault(x => x.IsPopuler == true)?.Title;
             ViewBag.PopularContentImageUrl = _featureService.GetListBL()
                                .FirstOrDefault(x => x.IsPopuler == true)?.ImageUrl;
-            @ViewBag.PopularContentDescription = _featureService.GetListBL()
+            ViewBag.PopularContentDescription = _featureService.GetListBL()
                                .FirstOrDefault(x => x.IsPopuler == true)?.Description;
             return View(values);
         }
