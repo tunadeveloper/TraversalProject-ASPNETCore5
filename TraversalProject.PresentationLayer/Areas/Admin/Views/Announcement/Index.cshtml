@@ -1,0 +1,30 @@
+﻿@using TraversalProject.PresentationLayer.Areas.Admin.Models
+@model List<AnnouncementListViewModel>
+@{
+    ViewData["Title"] = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Duyuru Listesi</h1>
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Başlık</th>
+        <th>İçerik</th>
+        <th>Detaylar</th>
+    </tr>
+    @foreach(var values in Model)
+    {
+        <tr>
+            <td>@values.Id</td>
+            <td>@values.Title</td>
+            <td>@values.Content</td>
+            <td>
+                <a asp-area="Admin" asp-controller="Announcement" asp-action="Details" asp-route-id="@values.Id" class="btn btn-info">Detaylar</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
