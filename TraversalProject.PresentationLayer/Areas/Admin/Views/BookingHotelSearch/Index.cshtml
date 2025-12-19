@@ -1,0 +1,66 @@
+﻿@using TraversalProject.PresentationLayer.Areas.Admin.Models
+@model BookingHotelSearchViewModel
+
+@{
+    ViewData["Title"] = "Booking Hotel Search";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <h3 class="mb-4">🏨 Booking Otel Sonuçları</h3>
+
+    @if (Model?.data?.hotels != null && Model.data.hotels.Any())
+    {
+        <div class="row">
+            @foreach (var hotel in Model.data.hotels)
+            {
+                <div class="col-md-4 mb-4">
+                    <div class="card h-100 shadow-sm">
+                        @if (hotel.property?.photoUrls != null && hotel.property.photoUrls.Any())
+                        {
+                            <img src="@hotel.property.photoUrls.First()"
+                                 class="card-img-top"
+                                 style="height:200px; object-fit:cover;" />
+                        }
+
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                @hotel.property?.name
+                            </h5>
+
+                            <p class="mb-1">
+                                ⭐ @hotel.property?.reviewScore
+                                <small class="text-muted">
+                                    (@hotel.property?.reviewCount yorum)
+                                </small>
+                            </p>
+
+                            <p class="mb-1">
+                                🏷️ Sınıf: @hotel.property?.propertyClass ★
+                            </p>
+
+                            <p class="mb-2">
+                                💰
+                                @hotel.property?.priceBreakdown?.grossPrice?.value
+                                @hotel.property?.priceBreakdown?.grossPrice?.currency
+                            </p>
+
+                            @if (hotel.property?.isPreferred == true)
+                            {
+                                <span class="badge bg-success">
+                                    Preferred
+                                </span>
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning">
+            Otel sonucu bulunamadı.
+        </div>
+    }
+</div>
