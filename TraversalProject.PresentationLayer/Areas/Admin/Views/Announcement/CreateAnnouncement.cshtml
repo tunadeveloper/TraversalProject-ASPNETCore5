@@ -1,0 +1,18 @@
+﻿@model TraversalProject.DTOLayer.DTOs.AnnouncementDTOs.AnnouncementAddDTO
+@{
+    ViewData["Title"] = "CreateAnnouncement";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h1>Duyuru Ekle</h1>
+
+<form method="post">
+    <label>Başlık</label>
+    <input type="text" name="Title" class="form-control"/>
+    <br />
+    <label>İçerik</label>
+    <textarea name="Content" class="form-control"></textarea>
+    <br />
+    <button type="submit" class="btn btn-primary">Ekle</button>
+</form>
+

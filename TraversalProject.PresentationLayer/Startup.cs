@@ -1,4 +1,3 @@
-using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -10,9 +9,7 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using System.IO;
 using TraversalProject.BusinessLayer.Container;
-using TraversalProject.BusinessLayer.ValidationRules;
 using TraversalProject.DataAccessLayer.Concrete;
-using TraversalProject.DTOLayer.DTOs.AnnouncementDTOs;
 using TraversalProject.EntityLayer.Concrete;
 
 namespace TraversalProject.PresentationLayer
@@ -58,7 +55,7 @@ namespace TraversalProject.PresentationLayer
             services.ContainerDependencies();
 
             services.AddAutoMapper(typeof(Startup));
-            services.AddTransient<IValidator<AnnouncementAddDTO>, AnnouncementValidator>();
+            services.CustomerValidator();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

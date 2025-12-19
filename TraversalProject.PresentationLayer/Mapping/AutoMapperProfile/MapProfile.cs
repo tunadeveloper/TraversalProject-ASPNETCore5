@@ -31,6 +31,12 @@ namespace TraversalProject.PresentationLayer.Mapping.AutoMapperProfile
 
             CreateMap<MailRequestDTO, EmailRequest>();
             CreateMap<EmailRequest, MailRequestDTO>();
+
+            CreateMap<Announcement, AnnouncementListDTO>();
+            CreateMap<AnnouncementListDTO, Announcement>();
+
+            CreateMap<AnnouncementUpdateDTO, Announcement>();
+            CreateMap<Announcement, AnnouncementUpdateDTO>();
         }
     }
 }

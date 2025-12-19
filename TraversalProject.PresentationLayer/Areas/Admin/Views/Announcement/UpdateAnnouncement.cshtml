@@ -1,0 +1,23 @@
+﻿
+@{
+    ViewData["Title"] = "UpdateAnnouncement";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+@model TraversalProject.DTOLayer.DTOs.AnnouncementDTOs.AnnouncementUpdateDTO
+
+<h1>Duyuru Güncelle</h1>
+
+<form method="post">
+    <input type="hidden" name="AnnouncementId" value="@Model.AnnouncementId"/>
+    <label>Başlık</label>
+    <input type="text" name="Title" class="form-control" value="@Model.Title"/>
+    <br />
+    <label>İçerik</label>
+    <textarea name="Content" class="form-control">@Model.Content</textarea>
+    <br />
+    <button type="submit" class="btn btn-primary">Güncelle</button>
+</form>
+
+
+

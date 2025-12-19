@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using FluentValidation;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,8 +7,10 @@ using System.Text;
 using System.Threading.Tasks;
 using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.BusinessLayer.Concrete;
+using TraversalProject.BusinessLayer.ValidationRules;
 using TraversalProject.DataAccessLayer.Abstract;
 using TraversalProject.DataAccessLayer.EntityFramework;
+using TraversalProject.DTOLayer.DTOs.AnnouncementDTOs;
 
 namespace TraversalProject.BusinessLayer.Container
 {
@@ -37,6 +40,11 @@ namespace TraversalProject.BusinessLayer.Container
             services.AddScoped<IContactUsService, ContactUsManager>();
             services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
+        }
+
+        public static void CustomerValidator(this IServiceCollection services)
+        {
+            services.AddTransient<IValidator<AnnouncementAddDTO>, AnnouncementValidator>();
         }
     }
 }
