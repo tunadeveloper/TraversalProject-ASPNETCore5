@@ -1,0 +1,68 @@
+﻿@using TraversalProject.PresentationLayer.Areas.Admin.Models
+@model List<ApiMovieViewModel>
+
+@{
+    ViewData["Title"] = "IMDB Top 100";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container-fluid">
+    <h3 class="mb-4">🎬 IMDB Top 100 Film Listesi</h3>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-bordered table-hover align-middle">
+                    <thead class="table-dark">
+                        <tr>
+                            <th>#</th>
+                            <th>Film Adı</th>
+                            <th>Yıl</th>
+                            <th>Puan</th>
+                            <th>Trailer</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model != null && Model.Any())
+                        {
+                            foreach (var movie in Model)
+                            {
+                                <tr>
+                                    <td>@movie.rank</td>
+                                    <td>@movie.title</td>
+                                    <td>@movie.year</td>
+                                    <td>
+                                        <span class="badge bg-success">
+                                            @movie.rating
+                                        </span>
+                                    </td>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(movie.trailer))
+                                        {
+                                            <a href="@movie.trailer" target="_blank"
+                                               class="btn btn-sm btn-outline-primary">
+                                                İzle
+                                            </a>
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">Yok</span>
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            <tr>
+                                <td colspan="5" class="text-center text-muted">
+                                    Film verisi bulunamadı.
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
