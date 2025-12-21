@@ -25,7 +25,7 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
 
         public IActionResult GetDestination(int id)
         {
-            var values = _getAllDesinationByIdQueryHandler.Handle(new GetAllDesinationByIdQuery { Id = id });
+            var values = _getAllDesinationByIdQueryHandler.Handle(new GetAllDesinationByIdQuery(id));
             return View(values);
         }
 }

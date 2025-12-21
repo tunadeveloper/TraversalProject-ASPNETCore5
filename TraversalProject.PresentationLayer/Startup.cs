@@ -28,6 +28,7 @@ namespace TraversalProject.PresentationLayer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddScoped<GetAllDestinationQueryHandler>();
+            services.AddScoped<GetAllDesinationByIdQueryHandler>();
             services.AddHttpClient();
             services.AddLogging(x =>
             {
