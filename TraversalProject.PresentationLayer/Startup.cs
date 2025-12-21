@@ -11,6 +11,7 @@ using System.IO;
 using TraversalProject.BusinessLayer.Container;
 using TraversalProject.DataAccessLayer.Concrete;
 using TraversalProject.EntityLayer.Concrete;
+using TraversalProject.PresentationLayer.CQRS.Handlers.DestinationHandlers;
 
 namespace TraversalProject.PresentationLayer
 {
@@ -26,6 +27,7 @@ namespace TraversalProject.PresentationLayer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<GetAllDestinationQueryHandler>();
             services.AddHttpClient();
             services.AddLogging(x =>
             {
