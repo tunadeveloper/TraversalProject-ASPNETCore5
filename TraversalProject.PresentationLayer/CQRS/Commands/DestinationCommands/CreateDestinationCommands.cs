@@ -1,11 +1,11 @@
-﻿namespace TraversalProject.PresentationLayer.CQRS.Results.DestinationResults
+﻿namespace TraversalProject.PresentationLayer.CQRS.Commands.DestinationCommands
 {
-    public class GetAllDesinationByIdQueryResult
+    public class CreateDestinationCommands
     {
-        public int Id { get; set; }
         public string City { get; set; }
         public string DayNight { get; set; }
         public double Price { get; set; }
         public int Capacity { get; set; }
+        public bool Status { get; set; }
     }
 }

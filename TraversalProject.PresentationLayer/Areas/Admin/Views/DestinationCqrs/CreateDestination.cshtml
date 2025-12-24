@@ -1,0 +1,32 @@
+﻿@using TraversalProject.PresentationLayer.CQRS.Commands.DestinationCommands
+@model CreateDestinationCommands
+@{
+    ViewData["Title"] = "Create Destination";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Yeni Lokasyon Ekle</h2>
+<form asp-area="Admin" asp-controller="DestinationCqrs" asp-action="CreateDestination" method="post">
+
+    <div class="form-group mb-3">
+        <label class="form-label">Şehir</label>
+        <input name="City" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">Gün/Gece Bilgisi</label>
+        <input name="DayNight" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">Fiyat</label>
+        <input name="Price" class="form-control" />
+    </div>
+
+    <div class="form-group mb-3">
+        <label class="form-label">Kapasite</label>
+        <input name="Capacity" class="form-control" />
+    </div>
+
+    <button type="submit" class="btn btn-primary">Kaydet</button>
+</form>

@@ -29,6 +29,9 @@ namespace TraversalProject.PresentationLayer
         {
             services.AddScoped<GetAllDestinationQueryHandler>();
             services.AddScoped<GetAllDesinationByIdQueryHandler>();
+            services.AddScoped<CreateDestinationCommandHandler>();
+            services.AddScoped<RemoveDestinationCommandHandler>();
+            services.AddScoped<UpdateDestinationCommandHandler>();
             services.AddHttpClient();
             services.AddLogging(x =>
             {
