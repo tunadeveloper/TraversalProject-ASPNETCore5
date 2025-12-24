@@ -1,0 +1,41 @@
+﻿@using TraversalProject.PresentationLayer.CQRS.Results.GuideResults
+@model List<GetAllGuideQueryResult>
+
+@{
+    ViewData["Title"] = "Guides";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<h2>Rehber Listesi</h2>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Ad Soyad</th>
+            <th>Açıklama</th>
+            <th>Resim</th>
+            <th>İşlemler</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var guide in Model)
+        {
+            <tr>
+                <td>@guide.GuideId</td>
+                <td>@guide.NameSurname</td>
+                <td>@guide.Description</td>
+                <td>
+                    @if (!string.IsNullOrEmpty(guide.ImageUrl))
+                    {
+                        <img src="@guide.ImageUrl" alt="@guide.NameSurname" style="width:70px; height:70px; object-fit:cover;" />
+                    }
+                </td>
+                <td>
+                    <a class="btn btn-primary btn-sm" href="/Admin/GuideMediatR/GuideDetails/@guide.GuideId">Düzenle</a>
+                    <a class="btn btn-danger btn-sm" href="/Admin/GuideMediatR/DeleteGuide/@guide.GuideId">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

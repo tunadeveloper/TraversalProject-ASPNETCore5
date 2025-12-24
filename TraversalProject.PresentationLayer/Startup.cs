@@ -1,4 +1,5 @@
 using FluentValidation.AspNetCore;
+using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +33,8 @@ namespace TraversalProject.PresentationLayer
             services.AddScoped<CreateDestinationCommandHandler>();
             services.AddScoped<RemoveDestinationCommandHandler>();
             services.AddScoped<UpdateDestinationCommandHandler>();
+            services.AddMediatR(typeof(Startup));
+
             services.AddHttpClient();
             services.AddLogging(x =>
             {
@@ -82,7 +85,7 @@ namespace TraversalProject.PresentationLayer
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404/","?code={0}");
+            app.UseStatusCodePagesWithReExecute("/ErrorPage/Error404/", "?code={0}");
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseAuthentication();
