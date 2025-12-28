@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.12.35506.116
+# Visual Studio Version 18
+VisualStudioVersion = 18.1.11312.151 d18.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.EntityLayer", "TraversalProject.EntityLayer\TraversalProject.EntityLayer.csproj", "{26148DD5-0EC3-45EE-AEA5-D75DD259CE31}"
 EndProject
@@ -14,6 +14,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.DTOLayer", "TraversalProject.DTOLayer\TraversalProject.DTOLayer.csproj", "{CD375E5D-45EB-4109-B8F1-098F776979F5}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.WebAPI", "TraversalProject.WebAPI\TraversalProject.WebAPI.csproj", "{44D3E303-45B6-434F-9A49-9E50FBB5F8B0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.SignalRLayer", "TraversalProject.SignalRLayer\TraversalProject.SignalRLayer.csproj", "{F25AD8EB-E2D2-4638-BA5C-1F110807C247}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -45,6 +47,10 @@ Global
 		{44D3E303-45B6-434F-9A49-9E50FBB5F8B0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{44D3E303-45B6-434F-9A49-9E50FBB5F8B0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{44D3E303-45B6-434F-9A49-9E50FBB5F8B0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F25AD8EB-E2D2-4638-BA5C-1F110807C247}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F25AD8EB-E2D2-4638-BA5C-1F110807C247}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F25AD8EB-E2D2-4638-BA5C-1F110807C247}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F25AD8EB-E2D2-4638-BA5C-1F110807C247}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
