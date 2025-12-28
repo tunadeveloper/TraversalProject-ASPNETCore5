@@ -1,49 +1,33 @@
 ﻿<div class="card mt-4 shadow-lg border-0">
     <div class="card-body">
         <h5 class="fw-bold mb-3">✍️ Yorum Yap</h5>
-        <form id="commentForm" asp-controller="Destination" asp-action="CreateComment" method="post">
-            <input type="hidden" name="DestinationId" value="@Model.Destination.DestinationId" />
 
-            <div class="mb-3">
-                <label class="form-label">Ad Soyad</label>
-                <input type="text" class="form-control" name="NameSurname" required />
-            </div>
-            <div class="mb-3">
-                <label class="form-label">E-Posta</label>
-                <input type="email" class="form-control" name="Email" required />
-            </div>
+        <form id="commentForm" asp-controller="Destination" asp-action="CreateComment" method="post">
+
+            <input type="hidden" name="DestinationId" value="@Model.Destination.DestinationId" />
+            <input type="hidden" name="NameSurname" value="@User.FindFirst("Name")?.Value" />
+            <input type="hidden" name="Email" value="@User.Identity.Name" />
+
             <div class="mb-3">
                 <label class="form-label">Yorumunuz</label>
                 <textarea class="form-control" name="UserComment" rows="4" required></textarea>
             </div>
 
-            <div class="mb-3 form-check">
-                <input type="checkbox" class="form-check-input" id="notRobot" />
-                <label class="form-check-label" for="notRobot">Ben robot değilim</label>
-            </div>
-
             <button type="submit" class="btn btn-success px-4">
                 <i class="fa fa-paper-plane me-2"></i> Gönder
             </button>
+
         </form>
     </div>
 </div>
+
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script>
     document.getElementById("commentForm").addEventListener("submit", function(e){
         e.preventDefault();
         var form = this;
-        var captchaChecked = document.getElementById("notRobot").checked;
-
-        if(!captchaChecked){
-            Swal.fire({
-                icon: 'error',
-                title: 'Hata!',
-                text: 'Lütfen "Ben robot değilim" kutusunu işaretleyin.'
-            });
-            return;
-        }
+       
 
         Swal.fire({
             title: 'Başarılı!',

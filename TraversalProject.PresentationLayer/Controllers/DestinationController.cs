@@ -1,22 +1,28 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using PagedList.Core;
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.EntityLayer.Concrete;
 using TraversalProject.PresentationLayer.Models;
 
 namespace TraversalProject.PresentationLayer.Controllers
 {
+    [AllowAnonymous]
     public class DestinationController : Controller
     {
         private readonly IDestinationService _destinationService;
         private readonly ICommentService _commentService;
+        private readonly UserManager<AppUser> _userManager;
 
-        public DestinationController(IDestinationService destinationService, ICommentService commentService)
+        public DestinationController(IDestinationService destinationService, ICommentService commentService, UserManager<AppUser> userManager)
         {
             _destinationService = destinationService;
             _commentService = commentService;
+            _userManager = userManager;
         }
 
         public IActionResult Index()
@@ -46,11 +52,24 @@ namespace TraversalProject.PresentationLayer.Controllers
         }
 
         [HttpPost]
-        public IActionResult CreateComment(Comment comment)
+        public async Task<IActionResult> CreateComment(Comment comment)
         {
-            comment.CreatedDate = Convert.ToDateTime(DateTime.Now.ToShortDateString());
+            if (!User.Identity.IsAuthenticated)
+            {
+                return RedirectToAction("Login", "Account");
+            }
+
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+
+            comment.UserId = user.Id;
+            comment.NameSurname = user.NameSurname;
+            comment.Email = user.Email;
+            comment.CreatedDate = DateTime.Now;
+
             _commentService.InsertBL(comment);
+
             return RedirectToAction("DestinationDetails", new { id = comment.DestinationId });
         }
+
     }
 }

@@ -66,7 +66,16 @@
             </div>
 
             <div class="container my-5">
-                @await Component.InvokeAsync("_CreateCommentComponentPartial")
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @await Component.InvokeAsync("_CreateCommentComponentPartial")
+                }
+                else
+                {
+                    <div class="alert alert-warning mt-4">
+                        Yorum yapabilmek için <a href="/Login/SignIn">giriş yapmalısınız</a>.
+                    </div>
+                }
                 <br /><br />
                 <h3 class="fw-bold mb-4">💬 Yorumlar</h3>
 
@@ -80,7 +89,7 @@
                                 <div>
                                     <h6 class="fw-bold mb-1">
                                         @comment.NameSurname
-                                        <small class="text-muted">(@comment.CreatedDate.ToShortDateString())</small>
+                                        <small class="text-muted">(@comment.CreatedDate.ToString("dd MMMM yyyy"))</small>
                                     </h6>
                                     <p class="mb-0">@comment.UserComment</p>
                                 </div>

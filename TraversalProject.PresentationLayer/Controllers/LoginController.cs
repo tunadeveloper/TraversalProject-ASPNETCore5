@@ -74,5 +74,13 @@ namespace TraversalProject.PresentationLayer.Controllers
         }
 
         #endregion
+
+        [Authorize]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("SignIn", "Login");
+        }
+
     }
 }

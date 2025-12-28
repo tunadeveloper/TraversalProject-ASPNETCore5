@@ -1,0 +1,27 @@
+﻿@using TraversalProject.EntityLayer.Concrete
+@model ContactUs
+
+<div class="col-lg-6 mt-lg-0 mt-5 contact-right">
+    <form asp-controller="Contact" asp-action="SendMessage" method="post" class="signin-form">
+        <div class="input-grids">
+            <div class="form-group">
+                <input asp-for="Name" class="contact-input" placeholder="Adınız *" />
+            </div>
+            <div class="form-group">
+                <input asp-for="Email" class="contact-input" placeholder="E-posta Adresiniz *" />
+            </div>
+            <div class="form-group">
+                <input asp-for="Subject" class="contact-input" placeholder="Konu *" />
+            </div>
+        </div>
+
+        <div class="form-group">
+            <textarea asp-for="Content" placeholder="Mesajınızı buraya yazın *" required=""></textarea>
+        </div>
+
+        <div class="text-right">
+            <button class="btn btn-style btn-primary">Mesaj Gönder</button>
+        </div>
+    </form>
+</div>
+

@@ -1,0 +1,163 @@
+﻿@model TraversalProject.PresentationLayer.Models.GuideAndAboutListViewModel
+
+@{
+    ViewData["Title"] = "Hakkımızda";
+    Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+<section class="w3l-about-breadcrumb text-left">
+    <div class="breadcrumb-bg breadcrumb-bg-about py-sm-5 py-4">
+        <div class="container py-2">
+            <h2 class="title">Hakkımızda</h2>
+            <ul class="breadcrumbs-custom-path mt-2">
+                <li><a href="/Default/Index">Anasayfa</a></li>
+                <li class="active"><span class="fa fa-arrow-right mx-2"></span> Hakkımızda</li>
+            </ul>
+        </div>
+    </div>
+</section>
+
+@foreach (var item in Model.Abouts)
+{
+    <section class="w3l-cta4 py-5">
+        <div class="container py-lg-5">
+            <div class="ab-section text-center">
+                <h6 class="sub-title">@item.Title</h6>
+                <h3 class="hny-title">@item.Title2</h3>
+
+                <p class="py-3 mb-3">
+                    @item.Description
+                </p>
+
+                <a href="/Destination/Index" class="btn btn-style btn-primary">Daha Fazlası</a>
+            </div>
+
+            <div class="row mt-5">
+                <div class="col-md-9 mx-auto">
+                    <img src="@item.Image" class="img-fluid" alt="Görsel">
+                </div>
+            </div>
+        </div>
+    </section>
+}
+
+<section class="w3l-content-6 py-5">
+    <div class="container py-lg-5">
+        <div class="row">
+            <div class="col-lg-6 content-6-left pr-lg-5">
+                <h6 class="sub-title">Neden Bizi Seçmelisiniz?</h6>
+                <h3 class="hny-title">Seyahat, konfor alanının sonunda başlar.</h3>
+            </div>
+            <div class="col-lg-6 content-6-right mt-lg-0 mt-4">
+                <p class="mb-3">
+                    Ekibimiz, güvenli ve keyifli bir seyahat deneyimi sunmak için her aşamada yanınızdadır.
+                </p>
+                <p class="mb-3">
+                    Geniş destinasyon seçenekleri ve profesyonel rehberlerle unutulmaz yolculuklar hedefliyoruz.
+                </p>
+                <a href="/Destination/Index" class="btn btn-style btn-primary mt-4">Daha Fazlası</a>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="w3l-grids1">
+    <div class="hny-three-grids py-5">
+        <div class="container py-lg-5">
+            <div class="row">
+                <div class="col-md-4 col-sm-6 mt-0 grids5-info">
+                    <a href="#"><img src="/assets/images/g1.jpg" class="img-fluid" alt=""></a>
+                    <h5>Bilgi</h5>
+                    <h4><a href="#">Yatırımcı İlişkileri</a></h4>
+                    <p>Seyahat yatırımlarınız için doğru kararları birlikte veriyoruz.</p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 mt-sm-0 mt-5 grids5-info">
+                    <a href="#"><img src="/assets/images/g2.jpg" class="img-fluid" alt=""></a>
+                    <h5>Destek</h5>
+                    <h4><a href="#">Güvenilir İş Ortaklığı</a></h4>
+                    <p>İşbirliklerimiz uzun vadeli güven ve kalite üzerine kuruludur.</p>
+                </div>
+
+                <div class="col-md-4 col-sm-6 mt-md-0 mt-5 grids5-info">
+                    <a href="#"><img src="/assets/images/g3.jpg" class="img-fluid" alt=""></a>
+                    <h5>Hizmet</h5>
+                    <h4><a href="#">Müşteri Hizmetleri</a></h4>
+                    <p>7/24 destek ekibimiz her zaman yanınızda.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="w3l-statshny py-5" id="stats">
+    <div class="container py-lg-5 py-md-4">
+        <div class="w3-stats-inner-info">
+            <div class="row">
+                <div class="col-lg-4 col-6 stats_info counter_grid text-left">
+                    <span class="fa fa-smile-o"></span>
+                    <p class="counter">1730</p>
+                    <h4>Mutlu Müşteri</h4>
+                </div>
+
+                <div class="col-lg-4 col-6 stats_info counter_grid1 text-left">
+                    <span class="fa fa-users"></span>
+                    <p class="counter">730</p>
+                    <h4>Özel Tur Paketi</h4>
+                </div>
+
+                <div class="col-lg-4 col-6 stats_info counter_grid mt-lg-0 mt-5 text-left">
+                    <span class="fa fa-database"></span>
+                    <p class="counter">30</p>
+                    <h4>Şube</h4>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section class="w3l-team" id="team">
+    <div class="team-block py-5">
+        <div class="container py-lg-5">
+            <div class="title-content text-center mb-lg-3 mb-4">
+                <h6 class="sub-title">Ekibimiz</h6>
+                <h3 class="hny-title">Rehberlerimizle Tanışın</h3>
+            </div>
+
+            <div class="row">
+                @foreach (var guide in Model.Guides.Where(x => x.Status == true))
+                {
+                    <div class="col-lg-3 col-6 mt-lg-5 mt-4">
+                        <div class="box16">
+                            <img src="@guide.ImageUrl" alt="" class="img-fluid" />
+                            <div class="box-content">
+                                <h3 class="title" style="color:white">@guide.NameSurname</h3>
+                                <span class="post">@guide.Description</span>
+
+                                <ul class="social">
+                                    @if (!string.IsNullOrEmpty(guide.XUrl))
+                                    {
+                                        <li>
+                                            <a href="@guide.XUrl">
+                                                <span class="fa fa-twitter"></span>
+                                            </a>
+                                        </li>
+                                    }
+
+                                    @if (!string.IsNullOrEmpty(guide.InstagramUrl))
+                                    {
+                                        <li>
+                                            <a href="@guide.InstagramUrl">
+                                                <span class="fa fa-instagram"></span>
+                                            </a>
+                                        </li>
+                                    }
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</section>

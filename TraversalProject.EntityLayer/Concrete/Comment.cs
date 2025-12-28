@@ -18,5 +18,8 @@ namespace TraversalProject.EntityLayer.Concrete
 
         public int DestinationId { get; set; }
         public Destination Destination { get; set; }
+
+        public int UserId { get; set; }
+        public AppUser User { get; set; }
     }
 }

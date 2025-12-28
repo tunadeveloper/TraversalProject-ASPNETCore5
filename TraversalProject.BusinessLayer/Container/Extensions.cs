@@ -30,6 +30,8 @@ namespace TraversalProject.BusinessLayer.Container
             services.AddScoped<IFeatureService, FeatureManager>();
             services.AddScoped<ISubAboutDal, EfSubAboutDal>();
             services.AddScoped<ISubAboutService, SubAboutManager>();
+            services.AddScoped<IAboutDal, EfAboutDal>();
+            services.AddScoped<IAboutService, AboutManager>();
             services.AddScoped<ITestimonialDal, EfTestimonialDal>();
             services.AddScoped<ITestimonalService, TestimonialManager>();
             services.AddScoped<ICommentDal, EfCommentDal>();
@@ -44,6 +46,8 @@ namespace TraversalProject.BusinessLayer.Container
             services.AddScoped<IAppUserService, AppUserManager>();
             services.AddScoped<IContactUsDal, EfContactUsDal>();
             services.AddScoped<IContactUsService, ContactUsManager>();
+            services.AddScoped<IContactDal, EfContactDal>();
+            services.AddScoped<IContactService, ContactManager>();
             services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
             services.AddScoped<IAccountService, AccountManager>();
