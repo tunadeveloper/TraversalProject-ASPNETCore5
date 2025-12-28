@@ -6,10 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using TraversalProject.BusinessLayer.Abstract;
+using TraversalProject.BusinessLayer.Abstract.UnitOfWork;
 using TraversalProject.BusinessLayer.Concrete;
+using TraversalProject.BusinessLayer.Concrete.UnitOfWork;
 using TraversalProject.BusinessLayer.ValidationRules;
 using TraversalProject.DataAccessLayer.Abstract;
+using TraversalProject.DataAccessLayer.Abstract.UnitOfWork;
 using TraversalProject.DataAccessLayer.EntityFramework;
+using TraversalProject.DataAccessLayer.EntityFramework.UnitOfWork;
+using TraversalProject.DataAccessLayer.Repository;
+using TraversalProject.DataAccessLayer.UnitOfWork;
 using TraversalProject.DTOLayer.DTOs.AnnouncementDTOs;
 
 namespace TraversalProject.BusinessLayer.Container
@@ -40,6 +46,10 @@ namespace TraversalProject.BusinessLayer.Container
             services.AddScoped<IContactUsService, ContactUsManager>();
             services.AddScoped<IAnnouncementDal, EfAnnouncementDal>();
             services.AddScoped<IAnnouncementService, AnnouncementManager>();
+            services.AddScoped<IAccountService, AccountManager>();
+            services.AddScoped<IAccountDal, EfAccountDal>();
+            services.AddScoped<IUnitOfWorkDal, UnitOfWorkDal>();
+
         }
 
         public static void CustomerValidator(this IServiceCollection services)

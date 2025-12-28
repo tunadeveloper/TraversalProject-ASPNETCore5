@@ -1,0 +1,44 @@
+﻿@using TraversalProject.PresentationLayer.Areas.Admin.Models
+@model AccountViewModel
+@{
+    ViewData["Title"] = "Hesap Transferi";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+}
+
+<div class="container mt-4">
+
+    <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+            <h4 class="mb-0">Hesap Transferi</h4>
+        </div>
+
+        <div class="card-body">
+
+            <form asp-action="Update" method="post">
+
+                <div class="mb-3">
+                    <label class="form-label">Gönderen Hesap ID</label>
+                    <input name="SenderId" class="form-control" placeholder="Gönderen hesabın ID değerini girin" required/>
+               
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Alıcı Hesap ID</label>
+                    <input name="ReceiverId" class="form-control" placeholder="Alıcı hesabın ID değerini girin"  required/>
+
+                </div>
+
+                <div class="mb-3">
+                    <label class="form-label">Gönderilecek Tutar</label>
+                    <input name="Amount" class="form-control" placeholder="Örneğin: 2500" required/>
+                
+                </div>
+
+                <button type="submit" class="btn btn-success w-100">Transferi Gerçekleştir</button>
+
+            </form>
+
+        </div>
+    </div>
+
+</div>
