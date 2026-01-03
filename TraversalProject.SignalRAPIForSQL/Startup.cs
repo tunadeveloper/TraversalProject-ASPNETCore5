@@ -1,8 +1,6 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -12,10 +10,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using TraversalProject.SignalRLayer.Hubs;
-using TraversalProject.SignalRLayer.Model;
 
-namespace TraversalProject.SignalRLayer
+namespace TraversalProject.SignalRAPIForSQL
 {
     public class Startup
     {
@@ -29,24 +25,11 @@ namespace TraversalProject.SignalRLayer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<VisitorService>();
-            services.AddSignalR();
-            services.AddCors(opt => opt.AddPolicy("CorsPolicy",
-                builder =>
-                {
-                    builder.AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .SetIsOriginAllowed((host) => true)
-                    .AllowCredentials();
-                }));
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DataAccess.Context.Context>(opt =>
-                    opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TraversalProject.SignalRLayer", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TraversalProject.SignalRAPIForSQL", Version = "v1" });
             });
         }
 
@@ -57,19 +40,16 @@ namespace TraversalProject.SignalRLayer
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TraversalProject.SignalRLayer v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TraversalProject.SignalRAPIForSQL v1"));
             }
 
-            app.UseHttpsRedirection();
-
             app.UseRouting();
-            app.UseCors("CorsPolicy");
+
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
-                endpoints.MapHub<VisitorHub>("/VisitorHub");
             });
         }
     }

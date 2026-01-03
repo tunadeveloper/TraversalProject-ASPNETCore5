@@ -38,7 +38,7 @@ namespace TraversalProject.SignalRLayer.Model
             List<VisitorChart> visitorCharts = new List<VisitorChart>();
             using (var command = _context.Database.GetDbConnection().CreateCommand())
             {
-                command.CommandText = "query sorgu";
+                command.CommandText = "select * from crosstab 'Select \"VisitDate\", \"City\", \"CityVisitCount\" FROM \"Visitors\" ORDER BY 1,2') AS ct(\"VisitDate\" TimeStamp, City1 int, City2 int, City3 int, City4 int, City5 int);";
                 command.CommandType = System.Data.CommandType.Text;
                 _context.Database.OpenConnection();
                 using (var reader = command.ExecuteReader())

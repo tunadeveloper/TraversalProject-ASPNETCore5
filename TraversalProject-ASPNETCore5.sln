@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 18
-VisualStudioVersion = 18.1.11312.151 d18.0
+VisualStudioVersion = 18.1.11312.151
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.EntityLayer", "TraversalProject.EntityLayer\TraversalProject.EntityLayer.csproj", "{26148DD5-0EC3-45EE-AEA5-D75DD259CE31}"
 EndProject
@@ -16,6 +16,10 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.WebAPI", "TraversalProject.WebAPI\TraversalProject.WebAPI.csproj", "{44D3E303-45B6-434F-9A49-9E50FBB5F8B0}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.SignalRLayer", "TraversalProject.SignalRLayer\TraversalProject.SignalRLayer.csproj", "{F25AD8EB-E2D2-4638-BA5C-1F110807C247}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.SignalRConsume", "TraversalProject.SignalRConsume\TraversalProject.SignalRConsume.csproj", "{CE973558-F958-434F-9FBE-BB3C1C43256E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TraversalProject.SignalRAPIForSQL", "TraversalProject.SignalRAPIForSQL\TraversalProject.SignalRAPIForSQL.csproj", "{9EAEB80E-9F94-43F5-8418-1E1E547B58BE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +55,14 @@ Global
 		{F25AD8EB-E2D2-4638-BA5C-1F110807C247}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F25AD8EB-E2D2-4638-BA5C-1F110807C247}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F25AD8EB-E2D2-4638-BA5C-1F110807C247}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CE973558-F958-434F-9FBE-BB3C1C43256E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CE973558-F958-434F-9FBE-BB3C1C43256E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CE973558-F958-434F-9FBE-BB3C1C43256E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CE973558-F958-434F-9FBE-BB3C1C43256E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9EAEB80E-9F94-43F5-8418-1E1E547B58BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9EAEB80E-9F94-43F5-8418-1E1E547B58BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9EAEB80E-9F94-43F5-8418-1E1E547B58BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9EAEB80E-9F94-43F5-8418-1E1E547B58BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
