@@ -1,17 +1,17 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System;
-using System.Collections.Generic;
+using System.Reflection;
 using System.Linq;
-using System.Threading.Tasks;
-using TraversalProject.SignalRAPIForSQL.DataAccess;
+using TraversalProject.SignalRLayer.Hubs;
+using TraversalProject.SignalRLayer.Model;
 
 namespace TraversalProject.SignalRAPIForSQL
 {
@@ -27,16 +27,39 @@ namespace TraversalProject.SignalRAPIForSQL
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddScoped<VisitorService>();
+            services.AddSignalR();
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
+                builder =>
+                {
+                    builder.AllowAnyHeader()
+                           .AllowAnyMethod()
+                           .SetIsOriginAllowed((host) => true)
+                           .AllowCredentials();
+                }));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TraversalProject.SignalRAPIForSQL", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SignalRApiForSql", Version = "v1" });
+                c.CustomSchemaIds(type => type.FullName);
+                var thisAssembly = Assembly.GetExecutingAssembly();
+                c.DocInclusionPredicate((_, api) =>
+                {
+                    var desc = api.ActionDescriptor as ControllerActionDescriptor;
+                    return desc?.ControllerTypeInfo?.Assembly == thisAssembly;
+                });
             });
 
-            services.AddDbContext<Context>(opt =>
+            services.AddDbContext<TraversalProject.SignalRLayer.DataAccess.Context.Context>(options =>
             {
-                opt.UseSqlServer(Configuration["DefaultConnection"]);
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection") ?? Configuration["DefaultConnection"]);
+            });
+
+            services.AddDbContext<TraversalProject.SignalRAPIForSQL.DataAccess.Context>(options =>
+            {
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection") ?? Configuration["DefaultConnection"]);
             });
         }
 
@@ -47,16 +70,17 @@ namespace TraversalProject.SignalRAPIForSQL
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TraversalProject.SignalRAPIForSQL v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SignalRApiForSql v1"));
             }
 
             app.UseRouting();
-
+            app.UseCors("CorsPolicy");
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+                endpoints.MapHub<VisitorHub>("/VisitorHub");
             });
         }
     }

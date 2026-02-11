@@ -12,6 +12,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using TraversalProject.SignalRLayer.DataAccess.Context;
 using TraversalProject.SignalRLayer.Hubs;
 using TraversalProject.SignalRLayer.Model;
 
@@ -31,22 +32,22 @@ namespace TraversalProject.SignalRLayer
         {
             services.AddScoped<VisitorService>();
             services.AddSignalR();
-            services.AddCors(opt => opt.AddPolicy("CorsPolicy",
+
+            services.AddCors(options => options.AddPolicy("CorsPolicy",
                 builder =>
                 {
                     builder.AllowAnyHeader()
-                    .AllowAnyMethod()
-                    .SetIsOriginAllowed((host) => true)
-                    .AllowCredentials();
+                           .AllowAnyMethod()
+                           .SetIsOriginAllowed((host) => true)
+                           .AllowCredentials();
                 }));
-            services.AddEntityFrameworkNpgsql()
-                .AddDbContext<DataAccess.Context.Context>(opt =>
-                    opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddDbContext<Context>(opt =>
+                opt.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TraversalProject.SignalRLayer", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "SignalRApi", Version = "v1" });
             });
         }
 
@@ -57,10 +58,8 @@ namespace TraversalProject.SignalRLayer
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TraversalProject.SignalRLayer v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "SignalRApi v1"));
             }
-
-            app.UseHttpsRedirection();
 
             app.UseRouting();
             app.UseCors("CorsPolicy");
