@@ -60,8 +60,10 @@ namespace TraversalProject.PresentationLayer
                 .Build();
                 config.Filters.Add(new AuthorizeFilter(policy));
             });
-
+            
             services.AddMvc();
+            services.ConfigureApplicationCookie(opt =>
+            opt.LoginPath = "/Login/SignIn");
             services.ContainerDependencies();
 
             services.AddAutoMapper(typeof(Startup));
