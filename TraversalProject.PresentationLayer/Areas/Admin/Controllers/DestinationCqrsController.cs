@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using TraversalProject.PresentationLayer.CQRS.Commands.DestinationCommands;
 using TraversalProject.PresentationLayer.CQRS.Handlers.DestinationHandlers;

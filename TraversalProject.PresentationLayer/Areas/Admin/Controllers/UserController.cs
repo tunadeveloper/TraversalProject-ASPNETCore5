@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.EntityLayer.Concrete;

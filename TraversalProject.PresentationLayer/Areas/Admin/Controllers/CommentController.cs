@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
 using TraversalProject.BusinessLayer.Abstract;
 
 namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers

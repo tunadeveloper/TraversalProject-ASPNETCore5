@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.EntityLayer.Concrete;
 
 namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
 {
+    [AllowAnonymous]
     [Area("Admin")]
     public class DestinationController : Controller
     {
