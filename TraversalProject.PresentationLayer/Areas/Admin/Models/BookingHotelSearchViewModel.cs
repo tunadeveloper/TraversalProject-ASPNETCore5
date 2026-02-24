@@ -1,9 +1,11 @@
-﻿namespace TraversalProject.PresentationLayer.Areas.Admin.Models
+using System.Text.Json;
+
+namespace TraversalProject.PresentationLayer.Areas.Admin.Models
 {
     public class BookingHotelSearchViewModel
     {
             public bool status { get; set; }
-            public string message { get; set; }
+            public JsonElement? message { get; set; }
             public long timestamp { get; set; }
             public Data data { get; set; }
       
