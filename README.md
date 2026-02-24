@@ -27,8 +27,6 @@ Bu projeyi geliştirerek **katmanlı mimari**, **Identity**, **CQRS**, **MediatR
 
 ## 🏗️ Mimari Yapı
 
-Traversal’ı güçlü ve genişletilebilir olması için katmanlı mimaride geliştirdim:
-
 | Katman | Açıklama |
 |--------|----------|
 | **Entity Layer** | Projedeki tüm domain modellerini oluşturdum. (Destination, Reservation, Guide, AppUser vb.) |
@@ -36,55 +34,24 @@ Traversal’ı güçlü ve genişletilebilir olması için katmanlı mimaride ge
 | **Business Layer** | İş kurallarını, FluentValidation doğrulamalarını ve servis yapısını buraya yerleştirdim. |
 | **DTO Layer** | Veri transferi için Create/Update/Result DTO’larını oluşturdum. |
 | **Presentation Layer (MVC)** | Admin & Member panelleri, ViewComponents, Identity, Razor yapısı. |
-| **WebAPI** | Swagger destekli REST API geliştirdim. |
+| **WebAPI Layer** | Swagger destekli REST API geliştirdim. |
 | **SignalR Projeleri** | Gerçek zamanlı ziyaretçi takibi için SignalR altyapısı oluşturdum. |
-
 
 ## 🧰 Kullandığım Teknolojiler
 
-### 🔧 Backend
-- ASP.NET Core 5 MVC & REST API  
-- Entity Framework Core  
-- Generic Repository & Unit of Work  
-- AutoMapper  
-- FluentValidation  
-- ASP.NET Core Identity  
-- CQRS + MediatR  
-
-### 🗄️ Veritabanı
-- SQL Server  
-- PostgreSQL (SignalR için)  
-
-### ⚙️ Ek Özellikler
-- SignalR ile anlık ziyaretçi takibi  
-- Excel (ClosedXML) & PDF (iTextSharp) raporlama  
-- MailKit ile mail gönderimi  
-- HttpClient ile dış API tüketimi  
-- Serilog loglama  
-
----
+🔧 **Backend:** ASP.NET Core 5 (MVC & REST API), Entity Framework Core, Generic Repository, Unit of Work, AutoMapper, FluentValidation, ASP.NET Core Identity, CQRS, MediatR  
+🗄️ **Veritabanı:** SQL Server, PostgreSQL (SignalR için)  
+📡 **Gerçek Zamanlı:** SignalR ile anlık ziyaretçi takibi  
+📑 **Raporlama:** ClosedXML (Excel), iTextSharp (PDF)  
+📬 **İletişim:** MailKit ile mail gönderimi  
+🌐 **API Tüketimi:** HttpClient + RapidAPI  
+📝 **Loglama:** Serilog  
 
 ## ✨ Uygulama Özellikleri
 
-### 👨‍💼 Admin Paneli
-- Rotalar, rehberler, duyurular ve yorum yönetimi  
-- Kullanıcı ve rol yönetimi  
-- Dashboard istatistikleri  
-- PDF / Excel raporları  
-- Döviz kuru & film API entegrasyonları  
-
-### 👤 Üye Paneli
-- Profil bilgileri  
-- Rezervasyon yönetimi (güncel, bekleyen, geçmiş)  
-- Yeni rezervasyon oluşturma  
-
-### 🌍 Genel Kullanıcı Arayüzü
-- Rotalar listesi  
-- Öne çıkan rotalar  
-- Rehberler  
-- Yorumlar  
-- İletişim & bülten aboneliği  
-
+👨‍💼 **Admin Paneli:** Rota, rehber, duyuru, yorum yönetimi; kullanıcı & rol yönetimi; dashboard istatistikleri; PDF/Excel raporları; döviz kuru ve film API entegrasyonları  
+👤 **Üye Paneli:** Profil yönetimi, rezervasyon ekranı (güncel / bekleyen / geçmiş), yeni rezervasyon oluşturma  
+🌍 **Genel Arayüz:** Rota listeleri, öne çıkan destinasyonlar, rehber profilleri, yorumlar, iletişim formu, bülten aboneliği  
 
 ## 🚀 Amacım
 
