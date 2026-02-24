@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using TraversalProject.EntityLayer.Concrete;
@@ -18,8 +18,9 @@ namespace TraversalProject.PresentationLayer.ViewComponents.MemberDashboard
         {
             var values = await _userManager.FindByNameAsync(User.Identity.Name);
             ViewBag.userName = values.NameSurname;
-            ViewBag.phone = values.PhoneNumber;
-            ViewBag.email = values.Email;
+            ViewBag.userLoginName = values.UserName;
+            ViewBag.phone = values.PhoneNumber ?? "—";
+            ViewBag.email = values.Email ?? "—";
             return View();
         }
     }

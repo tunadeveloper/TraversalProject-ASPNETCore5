@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
+using Microsoft.AspNetCore.Mvc;
 using TraversalProject.BusinessLayer.Abstract;
 
 namespace TraversalProject.PresentationLayer.ViewComponents.MemberDashboard
@@ -14,7 +15,7 @@ namespace TraversalProject.PresentationLayer.ViewComponents.MemberDashboard
 
         public IViewComponentResult Invoke()
         {
-            var values = _guideService.GetListBL();
+            var values = _guideService.GetListBL().Take(5).ToList();
             return View(values);
         }
     }

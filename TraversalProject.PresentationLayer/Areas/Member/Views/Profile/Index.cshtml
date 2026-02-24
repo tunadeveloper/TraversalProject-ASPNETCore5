@@ -1,11 +1,11 @@
-﻿@using TraversalProject.PresentationLayer.Areas.Member.Models
+@using TraversalProject.PresentationLayer.Areas.Member.Models
 @model UserEditViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Profil Bilgilerim";
     Layout = "~/Areas/Member/Views/Shared/_MemberLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h1>Profil Bilgilerim</h1>
 <form method="post" enctype="multipart/form-data">
     <label>Ad Soyad</label>
     <input type="text" name="nameSurname" class="form-control" value="@Model.nameSurname"/>

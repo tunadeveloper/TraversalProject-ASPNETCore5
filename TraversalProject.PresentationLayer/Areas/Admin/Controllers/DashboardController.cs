@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Identity;
+using System.Linq;
 using Microsoft.AspNetCore.Mvc;
 using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.EntityLayer.Concrete;
@@ -29,7 +29,7 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
             ViewBag.ReservationCount = _reservationService.GetListBL().Count;
             ViewBag.NewsletterCount = _newsletterService.GetListBL().Count;
             ViewBag.CommentCount = _commentService.GetListBL().Count;
-            var values = _guideService.GetListBL();
+            var values = _guideService.GetListBL().Take(3).ToList();
             return View(values);
         }
     }
