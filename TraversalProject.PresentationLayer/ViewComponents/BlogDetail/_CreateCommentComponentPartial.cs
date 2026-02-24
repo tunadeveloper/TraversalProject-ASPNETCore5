@@ -1,12 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc;
+using TraversalProject.PresentationLayer.Models;
 
 namespace TraversalProject.PresentationLayer.ViewComponents.BlogDetail
 {
-    public class _CreateCommentComponentPartial:ViewComponent
+    public class _CreateCommentComponentPartial : ViewComponent
     {
-        public IViewComponentResult Invoke()
+        public IViewComponentResult Invoke(CommentAndDestinationList model)
         {
-            return View();
+            return View(model);
         }
     }
 }
