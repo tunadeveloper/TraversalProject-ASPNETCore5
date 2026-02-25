@@ -55,8 +55,9 @@ Bu projeyi geliştirerek **katmanlı mimari**, **Identity**, **CQRS**, **MediatR
 
 ## 🚀 Amacım
 
-Traversal projesi, kurumsal düzeyde bir uygulamanın nasıl geliştirileceğini deneyimlemek için oluşturduğum en kapsamlı projelerden biri.  
-Hem mimari hem de pratik anlamda çok şey öğrendiğim bir çalışma oldu.
+Traversal projesi, kurumsal düzeyde bir uygulamanın nasıl geliştirileceğini deneyimlemek için oluşturduğum en kapsamlı çalışmalardan biri. Uygulamanın bazı bölümlerinde gerçek senaryolarda birebir kullanılmayan teknolojilere ve özelliklere de yer verdim. Bunun nedeni, farklı yaklaşımları bizzat uygulama üzerinden öğrenmek ve kurumsal mimaride karşılaşılabilecek yapıları pratik ederek pekiştirmekti.
+
+Hem mimari tasarım hem de uygulama geliştirme pratikleri açısından bana ciddi seviyede deneyim kazandıran bir proje oldu.
 
 ## 🎨 Genel Arayüz
 
