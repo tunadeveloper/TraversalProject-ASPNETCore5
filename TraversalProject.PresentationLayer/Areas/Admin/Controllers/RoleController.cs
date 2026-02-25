@@ -34,18 +34,22 @@ namespace TraversalProject.PresentationLayer.Areas.Admin.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateRole(AppRole model)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> CreateRole([Bind(Prefix = "")] AppRole model, [FromForm] string Name = null)
         {
-            if (model == null || string.IsNullOrWhiteSpace(model?.Name))
+            var roleName = (Name ?? model?.Name)?.Trim();
+            if (string.IsNullOrWhiteSpace(roleName))
             {
                 ModelState.AddModelError("Name", "Rol adı gereklidir.");
                 return View(model ?? new AppRole());
             }
-            var result = await _roleManager.CreateAsync(new AppRole { Name = model.Name.Trim() });
+            var result = await _roleManager.CreateAsync(new AppRole { Name = roleName });
             if (result.Succeeded)
-                return RedirectToAction("Index");
+                return RedirectToAction("Index", "Role", new { area = "Admin" });
             foreach (var error in result.Errors)
-                ModelState.AddModelError("", error.Description);
+                ModelState.AddModelError(string.Empty, error.Description);
+            if (model == null) model = new AppRole();
+            model.Name = roleName;
             return View(model);
         }
 
