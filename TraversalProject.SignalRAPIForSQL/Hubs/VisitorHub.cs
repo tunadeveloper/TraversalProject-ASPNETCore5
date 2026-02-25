@@ -1,6 +1,7 @@
-﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using TraversalProject.SignalRLayer.Model;
+using SignalRAPIForSQL.Models;
 
 namespace TraversalProject.SignalRAPIForSQL.Hubs
 {
@@ -13,7 +14,15 @@ namespace TraversalProject.SignalRAPIForSQL.Hubs
         }
         public async Task GetVisitorList()
         {
-            await Clients.All.SendAsync("ReceiveVisitorList", _visitorService.GetVisitorChartList());
+            try
+            {
+                var list = _visitorService.GetVisitorChartList();
+                await Clients.Caller.SendAsync("ReceiveVisitorList", list ?? new List<VisitorChart>());
+            }
+            catch
+            {
+                await Clients.Caller.SendAsync("ReceiveVisitorList", new List<VisitorChart>());
+            }
         }
     }
 }

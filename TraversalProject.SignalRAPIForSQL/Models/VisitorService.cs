@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.SignalR;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -31,35 +31,35 @@ namespace SignalRAPIForSQL.Models
         }
         public List<VisitorChart> GetVisitorChartList()
         {
-            List<VisitorChart> visitorCharts = new List<VisitorChart>();
-            using (var command = _context.Database.GetDbConnection().CreateCommand())
+            try
             {
-                command.CommandText = "Select tarih,[1],[2],[3],[4],[5] from (select[City],CityVisitCount,Cast([VisitDate] as Date) as tarih from Visitors) as visitTable Pivot (Sum(CityVisitCount) For City in([1],[2],[3],[4],[5])) as pivottable order by tarih asc";
-                command.CommandType = System.Data.CommandType.Text;
-                _context.Database.OpenConnection();
-                using (var reader = command.ExecuteReader())
+                var visitorCharts = new List<VisitorChart>();
+                var conn = _context.Database.GetDbConnection();
+                if (conn.State != System.Data.ConnectionState.Open)
+                    conn.Open();
+                using (var command = conn.CreateCommand())
                 {
-                    while (reader.Read())
+                    command.CommandText = "SELECT tarih,[1],[2],[3],[4],[5] FROM (SELECT [City], CityVisitCount, CAST([VisitDate] AS DATE) AS tarih FROM Visitors) AS visitTable PIVOT (SUM(CityVisitCount) FOR City IN ([1],[2],[3],[4],[5])) AS pivottable ORDER BY tarih ASC";
+                    command.CommandType = System.Data.CommandType.Text;
+                    using (var reader = command.ExecuteReader())
                     {
-                        VisitorChart visitorChart = new VisitorChart();
-                        visitorChart.VisitDate = reader.GetDateTime(0).ToShortDateString();
-                        Enumerable.Range(1, 5).ToList().ForEach(x =>
+                        while (reader.Read())
                         {
-                            if (DBNull.Value.Equals(reader[x]))
+                            var visitorChart = new VisitorChart();
+                            visitorChart.VisitDate = reader.GetDateTime(0).ToShortDateString();
+                            for (var x = 1; x <= 5; x++)
                             {
-                                visitorChart.Counts.Add(0);
+                                visitorChart.Counts.Add(reader.IsDBNull(x) ? 0 : reader.GetInt32(x));
                             }
-                            else
-                            {
-                                visitorChart.Counts.Add(reader.GetInt32(x));
-                            }
-                            
-                        });
-                        visitorCharts.Add(visitorChart);
+                            visitorCharts.Add(visitorChart);
+                        }
                     }
                 }
-                _context.Database.CloseConnection();
                 return visitorCharts;
+            }
+            catch
+            {
+                return new List<VisitorChart>();
             }
         }
     }

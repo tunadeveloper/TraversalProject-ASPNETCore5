@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 using TraversalProject.BusinessLayer.Abstract;
 using TraversalProject.DataAccessLayer.Abstract;
 
@@ -15,7 +16,7 @@ namespace TraversalProject.PresentationLayer.ViewComponents.Home
 
         public IViewComponentResult Invoke()
         {
-            var values = _destinationService.GetListBL();
+            var values = _destinationService.GetListBL().Where(x=>x.Status == true).ToList();
             return View(values);
         }
     }

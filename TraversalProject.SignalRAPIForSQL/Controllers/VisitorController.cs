@@ -19,14 +19,14 @@ namespace TraversalProject.SignalRAPIForSQL.Controllers
         public IActionResult CreateVisitor()
         {
             Random random = new Random();
-            Enumerable.Range(1, 100000).ToList().ForEach(x =>
+            Enumerable.Range(1, 100).ToList().ForEach(x =>
             {
                 foreach (ECity item in Enum.GetValues(typeof(ECity)))
                 {
                     var newVisitor = new Visitor
                     {
                         City = item,
-                        CityVisitCount = random.Next(100, 2000),
+                        CityVisitCount = random.Next(10, 200),
                         VisitDate = DateTime.Now.AddDays(x)
                     };
                     _visitorService.SaveVisitor(newVisitor).Wait();

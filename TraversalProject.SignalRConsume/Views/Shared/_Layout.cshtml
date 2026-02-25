@@ -1,51 +1,49 @@
-﻿<!DOCTYPE html>
-<html lang="en">
+<!DOCTYPE html>
+<html lang="tr">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - TraversalProject.SignalRConsume</title>
+    <title>@ViewData["Title"] - Traversal SignalR</title>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Lato:wght@400;700&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <style>
+        body { font-family: 'Lato', sans-serif; }
+        .navbar-traversal { background: #fff; box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+        .navbar-traversal .navbar-brand { font-family: 'Montserrat', sans-serif; font-weight: 700; font-size: 1.4rem; color: #161B1D !important; }
+        .navbar-traversal .nav-link { color: #333 !important; font-weight: 500; }
+        .breadcrumb-section { background: linear-gradient(135deg, #161B1D 0%, #2d3436 100%); padding: 2rem 0; margin-bottom: 2rem; }
+        .breadcrumb-section h2 { font-family: 'Montserrat', sans-serif; font-size: 1.75rem; font-weight: 700; color: #fff; margin: 0 0 0.25rem 0; }
+        .breadcrumb-section .path { font-size: 0.9rem; color: rgba(255,255,255,0.9); }
+        .breadcrumb-section .path a { color: #ffc107; text-decoration: none; }
+        .content-card { background: #fff; border-radius: 12px; box-shadow: 0 1px 3px rgba(0,0,0,.08); border: 1px solid #e7e7ed; padding: 1.5rem 2rem; }
+        .footer-traversal { background: #161B1D; color: rgba(255,255,255,0.85); padding: 1rem 0; margin-top: 2rem; font-size: 0.9rem; }
+        .footer-traversal a { color: #ffc107; }
+    </style>
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
+        <nav class="navbar navbar-expand-lg navbar-traversal border-bottom">
             <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">TraversalProject.SignalRConsume</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
+                <a class="navbar-brand" asp-controller="Home" asp-action="Index">Traversal</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Menü">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
+                <div class="collapse navbar-collapse" id="navbarNav">
+                    <ul class="navbar-nav ms-auto">
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Index">Anasayfa</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="nav-link" asp-controller="Home" asp-action="Privacy">Gizlilik</a>
                         </li>
                     </ul>
                 </div>
             </div>
         </nav>
     </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2026 - TraversalProject.SignalRConsume - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
+    @RenderBody()
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
-    @RenderSection("Script", required: false)
-    
-
 </body>
 </html>

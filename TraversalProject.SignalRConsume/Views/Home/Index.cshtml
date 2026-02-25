@@ -1,72 +1,130 @@
-﻿@{
-    ViewData["Title"] = "Index3";
+@{
+    ViewData["Title"] = "Bağlantı Durumu";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
+<section class="breadcrumb-section">
+    <div class="container">
+        <h2>SignalR Bağlantı Durumu</h2>
+        <div class="path">
+            <a href="@Url.Action("Index")">Anasayfa</a>
+            <span class="mx-2">/</span>
+            <span>Bağlantı Durumu</span>
+        </div>
+    </div>
+</section>
 
+<div class="container mb-5">
+    <div class="content-card mb-4">
+        <p class="mb-2 text-muted">Bağlantınızın durumu:</p>
+        <p class="mb-0 fs-5"><strong id="connectionStatus">—</strong></p>
+    </div>
 
-@section Scripts
-{
-
-    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
-    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-
-    <script type="text/javascript">
-        $(document).ready(() => {
-
-            var visitChartList = new Array();
-
-            visitChartList.push(["Tarih", "Edirne", "İstanbul", "Ankara", "Antalya", "Bursa"])
-
-            var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:63435/VisitorHub").build();
-
-            $("#connectionStatus").text(connection.connectionState);
-
-            connection.start().then(() => {
-                connection.invoke("GetVisitorList");
-                $("#connectionStatus").text(connection.connectionState);
-            }).catch((err) => { console.log(err) });
-
-
-            connection.on("ReceiveVisitorList", (visitList) => {
-
-                visitChartList = visitChartList.splice(0, 1);
-
-                visitList.forEach((item) => {
-
-                    visitChartList.push([item.visitDate, item.counts[0], item.counts[1], item.counts[2], item.counts[3], item.counts[4]])
-
-                })
-
-                google.charts.load('current', { 'packages': ['corechart'] });
-                google.charts.setOnLoadCallback(drawChart);
-
-            })
-
-            function drawChart() {
-                var data = google.visualization.arrayToDataTable(visitChartList);
-
-                var options = {
-                    title: 'Traversal Ziyaretçi Listesi Grafiği',
-                    curveType: 'none',
-                    legend: { position: 'bottom' }
-                };
-
-                var chart = new google.visualization.ColumnChart(document.getElementById('curve_chart'));
-
-                chart.draw(data, options);
-            }
-
-        })
-    </script>
-
-}
-
-<div class="container">
-    <br />
-    <div class="alert alert-warning">
-        Bağlantınızın Durumu:<b id="connectionStatus"></b>
+    <div class="content-card">
+        <h5 class="mb-3">Son 10 Ziyaretçi Verisi</h5>
+        <div id="visitorListPlaceholder" class="text-muted">Veri yükleniyor...</div>
+        <div id="visitorListWrap" class="table-responsive" style="display:none;">
+            <table class="table table-sm table-hover mb-0">
+                <thead>
+                    <tr>
+                        <th>Tarih</th>
+                        <th>Berlin</th>
+                        <th>Paris</th>
+                        <th>Londra</th>
+                        <th>Madrid</th>
+                        <th>Roma</th>
+                    </tr>
+                </thead>
+                <tbody id="visitorListBody"></tbody>
+            </table>
+        </div>
     </div>
 </div>
-<br />
 
-<div id="curve_chart" style="width: 1200px; height: 800px"></div>
+@section Scripts {
+    <script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+    <script>
+        (function () {
+            var hubUrl = "@(ViewBag.SignalRHubUrl ?? "http://localhost:16423/VisitorHub")";
+            var el = document.getElementById("connectionStatus");
+            var placeholder = document.getElementById("visitorListPlaceholder");
+            var wrap = document.getElementById("visitorListWrap");
+            var tbody = document.getElementById("visitorListBody");
+
+            function setStatus(text, isError) {
+                el.textContent = text;
+                el.style.color = isError ? "#dc3545" : "#0d6efd";
+            }
+
+            function renderList(visitList) {
+                if (visitList && visitList.length === 1 && Array.isArray(visitList[0]))
+                    visitList = visitList[0];
+                var last10 = (visitList && visitList.length) ? visitList.slice(-10) : [];
+                if (last10.length === 0) {
+                    placeholder.textContent = "Henüz veri yok.";
+                    placeholder.style.display = "block";
+                    wrap.style.display = "none";
+                    return;
+                }
+                placeholder.style.display = "none";
+                wrap.style.display = "block";
+                tbody.innerHTML = "";
+                last10.forEach(function (item) {
+                    var date = item.visitDate || item.VisitDate || "—";
+                    var counts = item.counts || item.Counts || [];
+                    if (!Array.isArray(counts)) counts = [];
+                    var tr = "<tr><td>" + date + "</td>";
+                    for (var i = 0; i < 5; i++) tr += "<td>" + (counts[i] != null ? counts[i] : "—") + "</td>";
+                    tr += "</tr>";
+                    tbody.innerHTML += tr;
+                });
+            }
+
+            setStatus("Bağlanıyor...", false);
+
+            var connection = new signalR.HubConnectionBuilder()
+                .withUrl(hubUrl)
+                .withAutomaticReconnect()
+                .build();
+
+            var timeoutId = null;
+            connection.on("ReceiveVisitorList", function (list) {
+                if (timeoutId) { clearTimeout(timeoutId); timeoutId = null; }
+                renderList(list);
+            });
+
+            connection.start()
+                .then(function () {
+                    setStatus("Bağlı", false);
+                    function doInvoke() {
+                        connection.invoke("GetVisitorList").catch(function (err) {
+                            console.error("SignalR Invoke Hatası:", err && err.toString ? err.toString() : err);
+                        });
+                    }
+                    doInvoke();
+                    setTimeout(function () {
+                        if (placeholder.textContent.indexOf("Veri yükleniyor") !== -1) doInvoke();
+                    }, 2000);
+                    timeoutId = setTimeout(function () {
+                        timeoutId = null;
+                        if (placeholder.textContent.indexOf("Veri yükleniyor") !== -1) {
+                            placeholder.textContent = "Veri gelmedi. Sunucu yanıt vermedi veya veritabanında kayıt yok.";
+                        }
+                    }, 10000);
+                })
+                .catch(function (err) {
+                    setStatus("Bağlantı yok", true);
+                    placeholder.textContent = "Bağlantı kurulmadığı için veri alınamadı.";
+                });
+
+            connection.onclose(function () { setStatus("Bağlantı yok", true); });
+            connection.onreconnecting(function () { setStatus("Bağlanıyor...", false); });
+            connection.onreconnected(function () {
+                setStatus("Bağlı", false);
+                connection.invoke("GetVisitorList").catch(function (err) {
+                        console.error("SignalR Invoke Hatası (reconnect):", err && err.toString ? err.toString() : err);
+                    });
+            });
+        })();
+    </script>
+}

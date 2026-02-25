@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.ApplicationParts;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -8,10 +9,11 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
-using System.Reflection;
 using System.Linq;
-using TraversalProject.SignalRLayer.Hubs;
-using TraversalProject.SignalRLayer.Model;
+using System.Reflection;
+using TraversalProject.SignalRAPIForSQL.Controllers;
+using TraversalProject.SignalRAPIForSQL.Hubs;
+using SignalRAPIForSQL.Models;
 
 namespace TraversalProject.SignalRAPIForSQL
 {
@@ -39,7 +41,12 @@ namespace TraversalProject.SignalRAPIForSQL
                            .AllowCredentials();
                 }));
 
-            services.AddControllers();
+            services.AddControllers()
+                .ConfigureApplicationPartManager(manager =>
+                {
+                    manager.ApplicationParts.Clear();
+                    manager.ApplicationParts.Add(new AssemblyPart(typeof(VisitorController).Assembly));
+                });
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "SignalRApiForSql", Version = "v1" });

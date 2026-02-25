@@ -6,6 +6,7 @@
 }
 
 <h1>Profil Bilgilerim</h1>
+<div asp-validation-summary="All" class="text-danger"></div>
 <form method="post" enctype="multipart/form-data">
     <label>Ad Soyad</label>
     <input type="text" name="nameSurname" class="form-control" value="@Model.nameSurname"/>
@@ -19,12 +20,12 @@
     <input type="text" name="phoneNumber" class="form-control" value="@Model.phoneNumber" />
     <br />
 
-    <label>Şifre</label>
-    <input type="text" name="password" class="form-control" value="@Model.password" />
+    <label>Yeni Şifre <small class="text-muted">(değiştirmek istemiyorsanız boş bırakın)</small></label>
+    <input type="password" name="password" class="form-control" placeholder="Boş bırakılırsa mevcut şifre korunur" autocomplete="new-password" />
     <br />
 
-    <label>Şifre Tekar</label>
-    <input type="text" name="confirmPassword" class="form-control" value="@Model.confirmPassword" />
+    <label>Yeni Şifre Tekrar</label>
+    <input type="password" name="confirmPassword" class="form-control" placeholder="Şifre değiştirilecekse tekrar girin" autocomplete="new-password" />
     <br />
  
         <div class="form-group">
