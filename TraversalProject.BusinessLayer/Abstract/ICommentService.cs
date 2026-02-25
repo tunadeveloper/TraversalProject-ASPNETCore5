@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +11,6 @@ namespace TraversalProject.BusinessLayer.Abstract
     {
         List<Comment> GetListByDestinationIdBL(int id);
         List<Comment> GetListCommentWithDestinationBL();
+        List<Comment> GetListByUserIdBL(int userId);
     }
 }

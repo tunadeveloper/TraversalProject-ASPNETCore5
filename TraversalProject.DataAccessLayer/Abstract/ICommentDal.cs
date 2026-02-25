@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,5 +11,6 @@ namespace TraversalProject.DataAccessLayer.Abstract
     {
         List<Comment> GetListByDestinationId(int id);
         List<Comment> GetListCommentWithDestination();
+        List<Comment> GetListByUserId(int userId);
     }
 }

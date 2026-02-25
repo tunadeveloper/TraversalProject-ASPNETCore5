@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +25,7 @@ namespace TraversalProject.DataAccessLayer.EntityFramework
 
         public List<Reservation> GetListWithReservationByAccepted(int id)
         {
-            return _context.Reservations.Include(x => x.Destination).Where(x => x.AppUserId == id && x.Status == "Onaylandı").ToList();
+            return _context.Reservations.Include(x => x.AppUser).Include(x => x.Destination).Where(x => x.AppUserId == id && x.Status == "Onaylandı").ToList();
         }
 
         public List<Reservation> GetListWithReservationByPrevious(int id)

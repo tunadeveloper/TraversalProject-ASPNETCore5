@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -42,6 +42,11 @@ namespace TraversalProject.BusinessLayer.Concrete
         public List<Comment> GetListCommentWithDestinationBL()
         {
             return _commentDal.GetListCommentWithDestination();
+        }
+
+        public List<Comment> GetListByUserIdBL(int userId)
+        {
+            return _commentDal.GetListByUserId(userId);
         }
 
         public void InsertBL(Comment p)

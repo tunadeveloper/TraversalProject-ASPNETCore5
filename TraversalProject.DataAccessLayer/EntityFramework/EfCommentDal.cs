@@ -1,4 +1,4 @@
-﻿using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,6 +31,15 @@ namespace TraversalProject.DataAccessLayer.EntityFramework
         public List<Comment> GetListCommentWithDestination()
         {
             return _context.Comments.Include(x => x.Destination).ToList();
+        }
+
+        public List<Comment> GetListByUserId(int userId)
+        {
+            return _context.Comments
+                .Include(x => x.Destination)
+                .Where(x => x.UserId == userId)
+                .OrderByDescending(x => x.CreatedDate)
+                .ToList();
         }
     }
 }

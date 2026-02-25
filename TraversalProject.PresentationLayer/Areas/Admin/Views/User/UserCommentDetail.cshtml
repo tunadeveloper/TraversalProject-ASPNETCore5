@@ -1,0 +1,63 @@
+@using TraversalProject.EntityLayer.Concrete
+@model AppUser
+@{
+    ViewData["Title"] = "Kullanıcı Yorumları";
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    var comments = ViewBag.Comments as List<Comment> ?? new List<Comment>();
+}
+
+<h1 class="mb-4">Kullanıcı Yorumları</h1>
+
+<div class="card shadow-sm border-0 mb-4">
+    <div class="card-header bg-white py-3 border-bottom">
+        <h5 class="card-title mb-0 fw-semibold">@(Model?.NameSurname ?? "Kullanıcı")</h5>
+        <small class="text-muted">@(Model?.Email ?? "")</small>
+    </div>
+    <div class="card-body">
+        <p class="mb-0"><strong>E-posta:</strong> @(Model?.Email ?? "—")</p>
+        <p class="mb-0"><strong>Telefon:</strong> @(Model?.PhoneNumber ?? "—")</p>
+    </div>
+</div>
+
+<div class="card shadow-sm border-0">
+    <div class="card-header bg-white py-3 border-bottom d-flex justify-content-between align-items-center">
+        <h5 class="card-title mb-0 fw-semibold">Yorumlar</h5>
+        <a href="@Url.Action("Index", "User", new { area = "Admin" })" class="btn btn-outline-secondary btn-sm">Kullanıcı Listesine Dön</a>
+    </div>
+    <div class="card-body p-0">
+        <div class="table-responsive">
+            <table class="table table-hover align-middle mb-0">
+                <thead class="table-light">
+                    <tr>
+                        <th>#</th>
+                        <th>Rota / Destinasyon</th>
+                        <th>Yorum</th>
+                        <th>Tarih</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (comments.Any())
+                    {
+                        var no = 1;
+                        foreach (var c in comments)
+                        {
+                            <tr>
+                                <td>@no</td>
+                                <td>@(c.Destination?.City ?? "—")</td>
+                                <td>@(c.UserComment ?? "—")</td>
+                                <td>@c.CreatedDate.ToString("dd/MM/yyyy HH:mm")</td>
+                            </tr>
+                            no++;
+                        }
+                    }
+                    else
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center text-muted py-4">Bu kullanıcıya ait yorum bulunamadı.</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
